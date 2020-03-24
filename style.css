@@ -1,0 +1,47 @@
+.container {
+  max-width: 400px;
+  display: block;
+  margin: auto;
+
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  border: 3px solid darkgray;
+  border-radius: 2%;
+}
+
+.title {
+  color: white;
+  background-color: darkgray;
+  height: 10%;
+  text-align: center;
+  font-weight: bold;
+  font-family: Courier, monospace;
+}
+
+.image {
+  display: block;
+  margin: auto;
+  width: 90%;
+}
+
+.list {
+  color: white;
+  font-weight: bold;
+  font-family: Courier, monospace;
+}
+
+.btn {
+  font-size: large;
+  font-weight: bold;
+  font-family: Courier, monospace;
+}
+
+
+
+.hidden {
+  display: none;
+}

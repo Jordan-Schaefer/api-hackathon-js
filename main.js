@@ -19,7 +19,7 @@ $.ajax({
 $.ajax({
   method: "GET",
   url: "https://rickandmortyapi.com/api/character/",
-  success: image,
+  success: result,
   error: errorMsg
 })
 
@@ -47,7 +47,7 @@ $.ajax({
 
 
 function result(data) {
-  console.log(data.results[0].image);
+  console.log(data);
 }
 
 function resultX(data) {
@@ -58,17 +58,17 @@ function resultXStatus(data) {
   console.log(data[1].status);
 }
 
-function image(data) {
-  var body = document.querySelector("body");
-  for (var i = 0; i < data.results.length; i++) {
+// function image(data) {
+//   var body = document.querySelector("body");
+//   for (var i = 0; i < data.results.length; i++) {
 
-    var img = document.createElement("img");
-    var result = data.results[i].image;
+//     var img = document.createElement("img");
+//     var result = data.results[i].image;
 
-    img.setAttribute("src", result);
-    body.appendChild(img);
-  }
-}
+//     img.setAttribute("src", result);
+//     body.appendChild(img);
+//   }
+// }
 
 function errorMsg(error) {
   console.error(error);
