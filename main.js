@@ -18,7 +18,7 @@ $.ajax({
 
 $.ajax({
   method: "GET",
-  url: "https://rickandmortyapi.com/api/character/2",
+  url: "https://rickandmortyapi.com/api/character/",
   success: image,
   error: errorMsg
 })
@@ -28,7 +28,7 @@ $.ajax({
 $.ajax({
   method: "GET",
   url: "https://api.spacexdata.com/v3/capsules",
-  success: result
+  success: resultX
 })
 
 $.ajax({
@@ -46,8 +46,8 @@ $.ajax({
 })
 
 
-function result(data){
-  console.log(data);
+function result(data) {
+  console.log(data.results[0].image);
 }
 
 function resultX(data) {
@@ -58,14 +58,18 @@ function resultXStatus(data) {
   console.log(data[1].status);
 }
 
-function image(data){
+function image(data) {
   var body = document.querySelector("body");
-  var img = document.createElement("img");
-  var newImage = data.image;
-  img.setAttribute("src", newImage);
-  body.appendChild(img);
+  for (var i = 0; i < data.results.length; i++) {
+
+    var img = document.createElement("img");
+    var result = data.results[i].image;
+
+    img.setAttribute("src", result);
+    body.appendChild(img);
+  }
 }
 
-function errorMsg(error){
+function errorMsg(error) {
   console.error(error);
 }
