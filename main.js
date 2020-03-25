@@ -51,14 +51,41 @@ $.ajax({
 })
 
 
+
 var rickAndMorthyPlanets = [
-  "images/c137.png"
-]
+  "images/c137.png",
+  "images/abadangoCluster.PNG",
+  "images/citadelOfRicks.png",
+  "images/worldendersLayer.jpg",
+  "images/anatomyPark.jpg",
+  "images/interdimensionalCable.jpg",
+  "images/immortalityFieldResort.png",
+  "images/postApocolipticEarth.jpg",
+  "images/purgePlanet.jpg",
+  "images/venzenulon.png",
+  "images/bepis.jpg",
+  "images/cronenbergEarth.jpg",
+  "images/Nuptia4.png",
+  "images/giantsTown.png",
+  "images/birdWorld.png",
+  "images/noopsHospital.png",
+  "images/earth5-126.png",
+  "images/mr.goldenfold.jpg",
+  "images/gromflomPrime.jpg",
+  "images/earthReplacement.jpg"
+];
+
+
+
 var body = document.querySelector("body");
 var newImage = document.createElement("img");
 newImage.setAttribute("src", rickAndMorthyPlanets[0]);
 
 body.appendChild(newImage);
+
+
+
+
 
 
 function errorMsg(error) {
