@@ -3,7 +3,7 @@
 $.ajax({
   method: "GET",
   url: "https://rickandmortyapi.com/api/location/",
-  success: result,
+  success: rickAndMortyPlanetImage,
   error: errorMsg
 })
 
@@ -12,7 +12,7 @@ $.ajax({
 $.ajax({
   mathod: "GET",
   url: "https://rickandmortyapi.com/api/character/",
-  success: rickAndMortyImage,
+  success: rickAndMortyCharacterImage,
   error: errorMsg
 })
 
@@ -50,11 +50,26 @@ $.ajax({
   error: errorMsg
 })
 
+
+var rickAndMorthyPlanets = [
+  "images/c137.png"
+]
+var body = document.querySelector("body");
+var newImage = document.createElement("img");
+newImage.setAttribute("src", rickAndMorthyPlanets[0]);
+
+body.appendChild(newImage);
+
+
 function errorMsg(error) {
   console.error(error);
 }
 
-function result(data) {
+function rickAndMortyPlanetImage(data) {
+  console.log(data);
+}
+
+function result(data){
   console.log(data);
 }
 
@@ -66,7 +81,7 @@ function resultXStatus(data) {
   console.log(data[1].status);
 }
 
-function rickAndMortyImage(data) {
+function rickAndMortyCharacterImage(data) {
   var body = document.querySelector("body");
   var container = document.createElement("div");
   for (var i = 0; i < data.results.length; i++) {
@@ -87,7 +102,7 @@ function rickAndMortyImage(data) {
     liLocation.textContent = "Location: " + data.results[i].location.name;
     button.textContent = "Select";
 
-    container.setAttribute("class", "container");
+    container.setAttribute("class", "container hidden");
     innerContainer.setAttribute("class", "inner-container");
     h1.setAttribute("class", "title");
     img.setAttribute("src", imgResult);
@@ -110,3 +125,39 @@ function rickAndMortyImage(data) {
     body.appendChild(container);
   }
 }
+
+
+// function scroll() {
+//   var _C = document.querySelector(".container");
+//   var n = _C.children.length;
+//   _C.style.setProperty("--n", n);
+
+//   function unify(e){
+//     return e.changedTouches ? e.changedTouches[0] : e;
+//   }
+
+//   var x0 = null;
+
+//   function lock(e) {
+//     x0 = unify(e).clientX;
+//   }
+
+//   var i = 0;
+
+//   function move(e) {
+//     if(x0 || x0 === 0){
+//       var dx = unify(e).clientX - x0, s = Math.sign(dx);
+//       if((i > 0 || s < 0) && (i < n - 1 || s > 0)){
+//         _C.style.setProperty("--i", i -= s);
+//       }
+//       x0 = null;
+//     }
+//   }
+
+//   _C.addEventListener("mousedown", lock, false);
+//   _C.addEventListener("touchstart", lock, false);
+
+//   _C.addEventListener("mouseup", move, false);
+//   _C.addEventListener("touchend", move, false);
+// }
+// setTimeout(scroll, 100);

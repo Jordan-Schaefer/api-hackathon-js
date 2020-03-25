@@ -1,23 +1,35 @@
 body {
-  display: block;
   margin: auto;
   max-width: 1300px;
+  /* overflow-x: hidden; */
 }
 
 header {
   text-align: center;
   font-size: 45px;
+  font-family: Courier, monospace;
+  font-weight: bolder;
 }
 
 .container {
+  margin: auto;
   width: 90%;
   display: flex;
+  /* align-items: center;
+  overflow-y: hidden;
+  height: 50vw;
+  max-height: 100vh;
+  width: calc(var(--n)*100%);
+  transform: translate(calc(var(--i, 0)/var(--n)*-100%)); */
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
 .inner-container {
-  width: 22%;
+  min-width: 32%;
+  width: 32%;
+  /* width: calc(100%/var(--n)); */
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   background-color: black;
