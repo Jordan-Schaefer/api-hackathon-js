@@ -51,6 +51,7 @@ $.ajax({
 
 
 
+
 var rickAndMorthyPlanets = [
   "images/c137.png",
   "images/abadangoCluster.PNG",
@@ -135,6 +136,8 @@ function rickAndMortyPlanetImage(data) {
     liDimension.setAttribute("class", "list");
     liResidents.setAttribute("class", "list");
     button.setAttribute("class", "btn");
+    button.setAttribute("id", "locationButton");
+    // button.addEventListener("click", handleLocation);
 
     innerContainer.appendChild(h1);
     innerContainer.appendChild(newImage);
@@ -180,6 +183,7 @@ function spaceXCapsules(data){
     liStatus.setAttribute("class", "list");
     liMissions.setAttribute("class", "list");
     button.setAttribute("class", "btn");
+    button.setAttribute("id", "capsuleButton")
 
     innerContainer.appendChild(h1);
     innerContainer.appendChild(image);
@@ -242,40 +246,28 @@ function rickAndMortyCharacterImage(data) {
 
 
 
+function handleIntro(event){
+  var introModal = document.querySelector(".intro-modal");
+  introModal.classList.add("hidden");
 
+  var planets = document.getElementById("planets");
+  planets.classList.remove("hidden");
+}
 
+function handleLocation(event){
+  var location = document.getElementById("planets");
+  location.classList.add("hidden");
 
-// function scroll() {
-//   var _C = document.querySelector(".container");
-//   var n = _C.children.length;
-//   _C.style.setProperty("--n", n);
+  var ships = document.getElementById("capsules");
+  ships.classList.remove("hidden");
+}
 
-//   function unify(e){
-//     return e.changedTouches ? e.changedTouches[0] : e;
-//   }
+setTimeout(handlers, 1000);
 
-//   var x0 = null;
+function handlers() {
+  var introButton = document.getElementById("introModal");
+  introButton.addEventListener("click", handleIntro);
 
-//   function lock(e) {
-//     x0 = unify(e).clientX;
-//   }
-
-//   var i = 0;
-
-//   function move(e) {
-//     if(x0 || x0 === 0){
-//       var dx = unify(e).clientX - x0, s = Math.sign(dx);
-//       if((i > 0 || s < 0) && (i < n - 1 || s > 0)){
-//         _C.style.setProperty("--i", i -= s);
-//       }
-//       x0 = null;
-//     }
-//   }
-
-//   _C.addEventListener("mousedown", lock, false);
-//   _C.addEventListener("touchstart", lock, false);
-
-//   _C.addEventListener("mouseup", move, false);
-//   _C.addEventListener("touchend", move, false);
-// }
-// setTimeout(scroll, 100);
+  var locationButton = document.getElementById("locationButton");
+  locationButton.addEventListener("click", handleLocation);
+}
