@@ -30,7 +30,7 @@ $.ajax({
 $.ajax({
   method: "GET",
   url: "https://api.spacexdata.com/v3/capsules",
-  success: spaceXdata,
+  success: spaceXCapsules,
   error: errorMsg
 })
 
@@ -157,23 +157,32 @@ function spaceXCapsules(data){
     var liMissions = document.createElement("li");
     var button = document.createElement("button");
 
-    h1.textContent = data[i].capsule_series;
+    h1.textContent = data[i].capsule_serial;
     var imageResult = spaceXShips[i];
     liCapsule.textContent = "Capsule: " + data[i].capsule_id;
     liStatus.textContent = "Status: " + data[i].status;
     liMissions.textContent = "Missions: " + data[i].missions.length;
+    button.textContent = "Select";
 
     container.setAttribute("class", "container");
     innerContainer.setAttribute("class", "inner-container");
     h1.setAttribute("class", "title");
-    img.setAttribute("src", imgResult);
-    img.setAttribute("class", "image");
+    image.setAttribute("src", imageResult);
+    image.setAttribute("class", "image");
+    liCapsule.setAttribute("class", "list");
     liStatus.setAttribute("class", "list");
-    liSpecies.setAttribute("class", "list");
-    liLocation.setAttribute("class", "list");
+    liMissions.setAttribute("class", "list");
     button.setAttribute("class", "btn");
 
-
+    innerContainer.appendChild(h1);
+    innerContainer.appendChild(image);
+    ul.appendChild(liCapsule);
+    ul.appendChild(liStatus);
+    ul.appendChild(liMissions);
+    innerContainer.appendChild(ul);
+    innerContainer.appendChild(button);
+    container.appendChild(innerContainer);
+    body.appendChild(container);
 
   }
 }
