@@ -3,18 +3,20 @@
 $.ajax({
   method: "GET",
   url: "https://rickandmortyapi.com/api/location/",
-  success: result
+  success: result,
+  error: errorMsg
 })
 
-//Rick and Morty Characters
+//Rick and Morty Characters Being Displayed in the Page with styling
 
 $.ajax({
   mathod: "GET",
   url: "https://rickandmortyapi.com/api/character/",
-  success: image
+  success: rickAndMortyImage,
+  error: errorMsg
 })
 
-// Rick and Morty Specific Character
+// Rick and Morty Characters
 
 $.ajax({
   method: "GET",
@@ -28,13 +30,15 @@ $.ajax({
 $.ajax({
   method: "GET",
   url: "https://api.spacexdata.com/v3/capsules",
-  success: resultX
+  success: resultX,
+  error: errorMsg
 })
 
 $.ajax({
   method: "GET",
   url: "https://api.spacexdata.com/v3/ships",
-  success: resultX
+  success: resultX,
+  error: errorMsg
 })
 
 // SpaceX Status
@@ -42,9 +46,13 @@ $.ajax({
 $.ajax({
   method: "GET",
   url: "https://api.spacexdata.com/v3/capsules",
-  success: resultXStatus
+  success: resultXStatus,
+  error: errorMsg
 })
 
+function errorMsg(error) {
+  console.error(error);
+}
 
 function result(data) {
   console.log(data);
@@ -58,10 +66,11 @@ function resultXStatus(data) {
   console.log(data[1].status);
 }
 
-function image(data) {
+function rickAndMortyImage(data) {
   var body = document.querySelector("body");
+  var container = document.createElement("div");
   for (var i = 0; i < data.results.length; i++) {
-    var container = document.createElement("div");
+
     var innerContainer = document.createElement("div");
     var h1 = document.createElement("h1");
     var img = document.createElement("img");
@@ -100,8 +109,4 @@ function image(data) {
 
     body.appendChild(container);
   }
-}
-
-function errorMsg(error) {
-  console.error(error);
 }
