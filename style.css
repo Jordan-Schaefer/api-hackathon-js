@@ -11,16 +11,25 @@ header {
   font-weight: bolder;
 }
 
+.intro-modal {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+  width: 35%;
+  font-family: Courier, monospace;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 3px solid rgba(169, 169, 169, 0.575);
+  color: white;
+}
+
 .container {
   margin: auto;
   width: 90%;
   display: flex;
-  /* align-items: center;
-  overflow-y: hidden;
-  height: 50vw;
-  max-height: 100vh;
-  width: calc(var(--n)*100%);
-  transform: translate(calc(var(--i, 0)/var(--n)*-100%)); */
   justify-content: space-around;
   flex-wrap: wrap;
 }
@@ -28,7 +37,6 @@ header {
 .inner-container {
   min-width: 32%;
   width: 32%;
-  /* width: calc(100%/var(--n)); */
   pointer-events: none;
   display: flex;
   flex-direction: column;

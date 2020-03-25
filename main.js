@@ -7,6 +7,12 @@ $.ajax({
   error: errorMsg
 })
 
+$.ajax({
+  method: "GET",
+  url: "https://rickandmortyapi.com/api/location/",
+  success: result
+})
+
 //Rick and Morty Characters Being Displayed in the Page with styling
 
 $.ajax({
@@ -39,7 +45,7 @@ $.ajax({
 $.ajax({
   method: "GET",
   url: "https://api.spacexdata.com/v3/capsules",
-  success: resultXStatus,
+  success: result,
   error: errorMsg
 })
 
@@ -68,16 +74,41 @@ var rickAndMorthyPlanets = [
   "images/earthReplacement.jpg"
 ];
 
+var spaceXShips = [
+  "images/cap101.jpg",
+  "images/cap102.jpg",
+  "images/cap103.jpg",
+  "images/cap104.png",
+  "images/cap105.jpg",
+  "images/cap106.jpg",
+  "images/cap107.jpg",
+  "images/cap108.jpg",
+  "images/cap109.jpg",
+  "images/cap110.jpg",
+  "images/cap111.jpg",
+  "images/cap112.jpg",
+  "images/cap113.jpg",
+  "images/cap201.jpg",
+  "images/cap205.jpg",
+  "images/cap202.jpg",
+  "images/cap203.jpg",
+  "images/cap204.jpg",
+  "images/cap206.jpg"
+];
 
 function errorMsg(error) {
   console.error(error);
 }
 
+function result(data) {
+  console.log(data);
+}
 
 function rickAndMortyPlanetImage(data) {
   var body = document.querySelector("body");
   var container = document.createElement("div");
-  container.setAttribute("class", "container");
+  container.setAttribute("class", "container hidden");
+  container.setAttribute("id", "planets");
 
   for (var i = 0; i < data.results.length; i++) {
     var innerContainer = document.createElement("div");
@@ -118,35 +149,11 @@ function rickAndMortyPlanetImage(data) {
   body.appendChild(container);
 }
 
-
-
-var spaceXShips = [
-  "images/cap101.jpg",
-  "images/cap102.jpg",
-  "images/cap103.jpg",
-  "images/cap104.png",
-  "images/cap105.jpg",
-  "images/cap106.jpg",
-  "images/cap107.jpg",
-  "images/cap108.jpg",
-  "images/cap109.jpg",
-  "images/cap110.jpg",
-  "images/cap111.jpg",
-  "images/cap112.jpg",
-  "images/cap113.jpg",
-  "images/cap201.jpg",
-  "images/cap205.jpg",
-  "images/cap202.jpg",
-  "images/cap203.jpg",
-  "images/cap204.jpg",
-  "images/cap206.jpg"
-];
-
-
 function spaceXCapsules(data){
   var body = document.querySelector("body");
   var container = document.createElement("div");
   container.setAttribute("class", "container");
+  container.setAttribute("id", "capsules");
   for(var i = 0; i < data.length; i++){
     var innerContainer = document.createElement("div");
     var h1 = document.createElement("h1");
@@ -164,7 +171,7 @@ function spaceXCapsules(data){
     liMissions.textContent = "Missions: " + data[i].missions.length;
     button.textContent = "Select";
 
-    container.setAttribute("class", "container");
+    container.setAttribute("class", "container hidden");
     innerContainer.setAttribute("class", "inner-container");
     h1.setAttribute("class", "title");
     image.setAttribute("src", imageResult);
@@ -187,24 +194,10 @@ function spaceXCapsules(data){
   }
 }
 
-
-
-
-function result(data) {
-  console.log(data);
-}
-
-function spaceXdata(data) {
-  console.log(data);
-}
-
-function resultXStatus(data) {
-  console.log(data);
-}
-
 function rickAndMortyCharacterImage(data) {
   var body = document.querySelector("body");
   var container = document.createElement("div");
+  container.setAttribute("id", "characters");
 
   for (var i = 0; i < data.results.length; i++) {
 
@@ -224,7 +217,7 @@ function rickAndMortyCharacterImage(data) {
     liLocation.textContent = "Location: " + data.results[i].location.name;
     button.textContent = "Select";
 
-    container.setAttribute("class", "container");
+    container.setAttribute("class", "container hidden");
     innerContainer.setAttribute("class", "inner-container");
     h1.setAttribute("class", "title");
     img.setAttribute("src", imgResult);
@@ -246,6 +239,10 @@ function rickAndMortyCharacterImage(data) {
     body.appendChild(container);
   }
 }
+
+
+
+
 
 
 // function scroll() {
