@@ -135,9 +135,8 @@ function rickAndMortyPlanetImage(data) {
     liType.setAttribute("class", "list");
     liDimension.setAttribute("class", "list");
     liResidents.setAttribute("class", "list");
-    button.setAttribute("class", "btn");
-    button.setAttribute("id", "locationButton");
-    // button.addEventListener("click", handleLocation);
+    button.setAttribute("class", "btn locationButton");
+    button.setAttribute("id", "locationButton" + i);
 
     innerContainer.appendChild(h1);
     innerContainer.appendChild(newImage);
@@ -152,12 +151,12 @@ function rickAndMortyPlanetImage(data) {
   body.appendChild(container);
 }
 
-function spaceXCapsules(data){
+function spaceXCapsules(data) {
   var body = document.querySelector("body");
   var container = document.createElement("div");
   container.setAttribute("class", "container");
   container.setAttribute("id", "capsules");
-  for(var i = 0; i < data.length; i++){
+  for (var i = 0; i < data.length; i++) {
     var innerContainer = document.createElement("div");
     var h1 = document.createElement("h1");
     var image = document.createElement("img");
@@ -246,7 +245,8 @@ function rickAndMortyCharacterImage(data) {
 
 
 
-function handleIntro(event){
+function handleIntro(event) {
+
   var introModal = document.querySelector(".intro-modal");
   introModal.classList.add("hidden");
 
@@ -254,20 +254,34 @@ function handleIntro(event){
   planets.classList.remove("hidden");
 }
 
-function handleLocation(event){
+
+
+function handleLocation(event) {
   var location = document.getElementById("planets");
   location.classList.add("hidden");
+  //event.currentTarget (which card you clicked)
+  //Call onSelectPress with data from currentTarget
 
   var ships = document.getElementById("capsules");
   ships.classList.remove("hidden");
+
+  onSelectPress(event.currentTarget)
 }
 
-setTimeout(handlers, 1000);
+setTimeout(handlers, 2000);
 
 function handlers() {
   var introButton = document.getElementById("introModal");
   introButton.addEventListener("click", handleIntro);
 
-  var locationButton = document.getElementById("locationButton");
+
+  var locationButton = document.querySelector("#locationButton0");
   locationButton.addEventListener("click", handleLocation);
+}
+
+function onSelectPress(data) {
+  console.log(data);
+  // $.ajax({
+  //   //Take info from the data
+  // })
 }
