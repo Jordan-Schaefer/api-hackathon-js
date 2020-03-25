@@ -76,13 +76,49 @@ var rickAndMorthyPlanets = [
 ];
 
 
+function rickAndMortyPlanetImage(data) {
+  var body = document.querySelector("body");
+  var container = document.createElement("div");
+  container.setAttribute("class", "container hidden");
 
-var body = document.querySelector("body");
-var newImage = document.createElement("img");
-newImage.setAttribute("src", rickAndMorthyPlanets[0]);
+  for (var i = 0; i < data.results.length; i++) {
+    var innerContainer = document.createElement("div");
+    var h1 = document.createElement("h1");
+    var newImage = document.createElement("img");
+    var ul = document.createElement("ul");
+    var liType = document.createElement("li");
+    var liDimension = document.createElement("li");
+    var liResidents = document.createElement("li");
+    var button = document.createElement("button");
 
-body.appendChild(newImage);
+    h1.textContent = data.results[i].name;
+    var imageResult = rickAndMorthyPlanets[i];
+    liType.textContent = "Type: " + data.results[i].type;
+    liDimension.textContent = "Dimension: " + data.results[i].dimension;
+    liResidents.textContent = "Known Residents: " + data.results[i].residents.length;
+    button.textContent = "Select";
 
+    innerContainer.setAttribute("class", "inner-container");
+    h1.setAttribute("class", "title");
+    newImage.setAttribute("src", imageResult);
+    newImage.setAttribute("class", "image");
+    liType.setAttribute("class", "list");
+    liDimension.setAttribute("class", "list");
+    liResidents.setAttribute("class", "list");
+    button.setAttribute("class", "btn");
+
+    innerContainer.appendChild(h1);
+    innerContainer.appendChild(newImage);
+    ul.appendChild(liType);
+    ul.appendChild(liDimension);
+    ul.appendChild(liResidents);
+    innerContainer.appendChild(ul);
+    innerContainer.appendChild(button);
+    container.appendChild(innerContainer);
+
+  }
+  body.appendChild(container);
+}
 
 
 
@@ -92,11 +128,9 @@ function errorMsg(error) {
   console.error(error);
 }
 
-function rickAndMortyPlanetImage(data) {
-  console.log(data);
-}
 
-function result(data){
+
+function result(data) {
   console.log(data);
 }
 
@@ -129,7 +163,7 @@ function rickAndMortyCharacterImage(data) {
     liLocation.textContent = "Location: " + data.results[i].location.name;
     button.textContent = "Select";
 
-    container.setAttribute("class", "container hidden");
+    container.setAttribute("class", "container");
     innerContainer.setAttribute("class", "inner-container");
     h1.setAttribute("class", "title");
     img.setAttribute("src", imgResult);
@@ -140,7 +174,6 @@ function rickAndMortyCharacterImage(data) {
     button.setAttribute("class", "btn");
 
     innerContainer.appendChild(h1);
-    innerContainer.appendChild(img);
     innerContainer.appendChild(img);
     ul.appendChild(liStatus);
     ul.appendChild(liSpecies);
