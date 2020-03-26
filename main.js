@@ -52,8 +52,6 @@ $.ajax({
 })
 
 
-
-
 var rickAndMorthyPlanets = [
   "images/c137.png",
   "images/abadangoCluster.PNG",
@@ -136,7 +134,7 @@ function rickAndMortyPlanetImage(data) {
     liDimension.setAttribute("class", "list");
     liResidents.setAttribute("class", "list");
     button.setAttribute("class", "btn locationButton");
-    button.setAttribute("id", "locationButton" + i);
+    button.setAttribute("id", i);
 
     innerContainer.appendChild(h1);
     innerContainer.appendChild(newImage);
@@ -147,9 +145,7 @@ function rickAndMortyPlanetImage(data) {
     innerContainer.appendChild(button);
 
     container.appendChild(innerContainer);
-
   }
-  // body.appendChild(container);
 }
 
 function spaceXCapsules(data) {
@@ -182,7 +178,7 @@ function spaceXCapsules(data) {
     liStatus.setAttribute("class", "list");
     liMissions.setAttribute("class", "list");
     button.setAttribute("class", "btn");
-    button.setAttribute("id", "capsuleButton" + i);
+    button.setAttribute("id", i);
 
     innerContainer.appendChild(h1);
     innerContainer.appendChild(image);
@@ -198,9 +194,8 @@ function spaceXCapsules(data) {
 }
 
 function rickAndMortyCharacterImage(data) {
-  var body = document.querySelector("body");
-  var container = document.getElementById("characters");
 
+  var container = document.getElementById("characters");
 
   for (var i = 0; i < data.results.length; i++) {
 
@@ -229,7 +224,7 @@ function rickAndMortyCharacterImage(data) {
     liSpecies.setAttribute("class", "list");
     liLocation.setAttribute("class", "list");
     button.setAttribute("class", "btn");
-    button.setAttribute("id", "character" + i);
+    button.setAttribute("id", i);
 
     innerContainer.appendChild(h1);
     innerContainer.appendChild(img);
@@ -239,7 +234,6 @@ function rickAndMortyCharacterImage(data) {
     innerContainer.appendChild(ul);
     innerContainer.appendChild(button);
     container.appendChild(innerContainer);
-
 
   }
 }
@@ -258,17 +252,12 @@ function handleIntro(event) {
 
 
 function handleLocation(event) {
-
-  //event.currentTarget (which card you clicked)
-  //Call onSelectPress with data from currentTarget
   var planets = document.getElementById("planets");
   planets.classList.add("hidden");
 
   var ships = document.getElementById("capsules");
   ships.classList.remove("hidden");
-
-
-  onSelectPress(event.target);
+  onSelectLocation(event.target);
 }
 
 
@@ -279,12 +268,12 @@ function handleShips(event){
   var characters = document.getElementById("characters");
   characters.classList.remove("hidden");
 
-  onSelectPress(event.target);
+  onSelectShips(event.target);
 }
 
 
 function handleCharacters(event){
-
+  onSelectCharacter(event.target);
 }
 
 
@@ -297,13 +286,126 @@ function handlers() {
 
   var ships = document.getElementById("capsules");
   ships.addEventListener("click", handleShips);
+
+  var character = document.getElementById("characters");
+  character.addEventListener("click", handleCharacters);
 }
+
+
+
+function onSelectLocation(data) {
+
+  var dataAtt = data.getAttribute("id");
+  dataAtt++;
+  $.ajax({
+    method: "GET",
+    url: "https://rickandmortyapi.com/api/location/" + dataAtt,
+    success: locationSelect,
+    error: errorMsg
+  })
+}
+
+
+function locationSelect(data){
+  console.log(data);
+  var selectLocation = document.querySelector(".select-location");
+  var innerContainer = document.createElement("div");
+  var h1 = document.createElement("h1");
+  var img = document.createElement("img");
+  var ul = document.createElement("ul");
+  var liType = document.createElement("li");
+  var liDimension = document.createElement("li");
+  var liResidents = document.createElement("li");
+
+  innerContainer.classList.add("inner-container");
+  h1.classList.add("title");
+  img.setAttribute("src", rickAndMorthyPlanets[data.id - 1]);
+  img.classList.add("image")
+  liType.classList.add("list");
+  liDimension.classList.add("list");
+  liResidents.classList.add("list");
+
+  h1.textContent = data.name;
+  liType.textContent = data.type;
+  liDimension.textContent = data.dimension;
+  liResidents.textContent = data.residents.length;
+
+  innerContainer.appendChild(h1);
+  innerContainer.appendChild(img);
+  ul.appendChild(liType);
+  ul.appendChild(liDimension);
+  ul.appendChild(liResidents);
+  innerContainer.appendChild(ul);
+  selectLocation.appendChild(innerContainer);
+}
+
+function onSelectShips(data){
+  console.log(data);
+  var dataAtt = data.getAttribute("id");
+  console.log(dataAtt);
+  $.ajax({
+    method: "GET",
+    url: "https://api.spacexdata.com/v3/capsules/C1" + (dataAtt + 1),
+    success: shipSelect,
+    error: errorMsg
+  })
+}
+
+function shipSelect(data){
+
+  console.log(data);
+}
+
+
+function onSelectCharacter (data){
+  console.log(data)
+
+
+  var dataAtt = data.getAttribute("id");
+  dataAtt++;
+
+  console.log(dataAtt);
+  $.ajax({
+    method: "GET",
+    url: "https://rickandmortyapi.com/api/character/" + dataAtt,
+    success: characterSelect,
+    error: errorMsg
+  })
+}
+
+function characterSelect (data){
+  console.log(data);
+  var selectCharacter = document.querySelector(".select-character");
+  var innerContainer = document.createElement("div");
+  var h1 = document.createElement("h1");
+  var img = document.createElement("img");
+  var ul = document.createElement("ul");
+  var liStatus = document.createElement("li");
+  var liSpecies = document.createElement("li");
+  var liLocation = document.createElement("li");
+
+  innerContainer.classList.add("inner-container");
+  h1.classList.add("title");
+  img.setAttribute("src", data.image);
+  img.classList.add("image")
+  liStatus.classList.add("list");
+  liSpecies.classList.add("list");
+  liLocation.classList.add("list");
+
+  h1.textContent = data.name;
+  liStatus.textContent = data.status;
+  liSpecies.textContent = data.species;
+  liLocation.textContent = data.location;
+
+  innerContainer.appendChild(h1);
+  innerContainer.appendChild(img);
+  ul.appendChild(liStatus);
+  ul.appendChild(liSpecies);
+  ul.appendChild(liLocation);
+  innerContainer.appendChild(ul);
+  selectCharacter.appendChild(innerContainer);
+
+}
+
 
 handlers();
-
-function onSelectPress(data) {
-  console.log(data);
-  // $.ajax({
-  //   //Take info from the data
-  // })
-}
