@@ -37,7 +37,6 @@ header {
 .inner-container {
   min-width: 32%;
   width: 32%;
-  pointer-events: none;
   display: flex;
   flex-direction: column;
   background-color: black;

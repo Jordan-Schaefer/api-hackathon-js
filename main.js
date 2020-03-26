@@ -1,4 +1,5 @@
 //Rick and Morty Planets
+var container = document.querySelector("#planets");
 
 $.ajax({
   method: "GET",
@@ -10,7 +11,8 @@ $.ajax({
 $.ajax({
   method: "GET",
   url: "https://rickandmortyapi.com/api/location/",
-  success: result
+  success: result,
+  error: errorMsg
 })
 
 //Rick and Morty Characters Being Displayed in the Page with styling
@@ -106,10 +108,8 @@ function result(data) {
 }
 
 function rickAndMortyPlanetImage(data) {
-  var body = document.querySelector("body");
-  var container = document.createElement("div");
-  container.setAttribute("class", "container hidden");
-  container.setAttribute("id", "planets");
+
+  container.classList.add("hidden");
 
   for (var i = 0; i < data.results.length; i++) {
     var innerContainer = document.createElement("div");
@@ -149,14 +149,13 @@ function rickAndMortyPlanetImage(data) {
     container.appendChild(innerContainer);
 
   }
-  body.appendChild(container);
+  // body.appendChild(container);
 }
 
 function spaceXCapsules(data) {
   var body = document.querySelector("body");
-  var container = document.createElement("div");
-  container.setAttribute("class", "container");
-  container.setAttribute("id", "capsules");
+  var container = document.getElementById("capsules");
+
   for (var i = 0; i < data.length; i++) {
     var innerContainer = document.createElement("div");
     var h1 = document.createElement("h1");
@@ -174,7 +173,7 @@ function spaceXCapsules(data) {
     liMissions.textContent = "Missions: " + data[i].missions.length;
     button.textContent = "Select";
 
-    container.setAttribute("class", "container hidden");
+    container.classList.add("hidden");
     innerContainer.setAttribute("class", "inner-container");
     h1.setAttribute("class", "title");
     image.setAttribute("src", imageResult);
@@ -183,7 +182,7 @@ function spaceXCapsules(data) {
     liStatus.setAttribute("class", "list");
     liMissions.setAttribute("class", "list");
     button.setAttribute("class", "btn");
-    button.setAttribute("id", "capsuleButton")
+    button.setAttribute("id", "capsuleButton" + i);
 
     innerContainer.appendChild(h1);
     innerContainer.appendChild(image);
@@ -200,8 +199,8 @@ function spaceXCapsules(data) {
 
 function rickAndMortyCharacterImage(data) {
   var body = document.querySelector("body");
-  var container = document.createElement("div");
-  container.setAttribute("id", "characters");
+  var container = document.getElementById("characters");
+
 
   for (var i = 0; i < data.results.length; i++) {
 
@@ -221,7 +220,7 @@ function rickAndMortyCharacterImage(data) {
     liLocation.textContent = "Location: " + data.results[i].location.name;
     button.textContent = "Select";
 
-    container.setAttribute("class", "container hidden");
+    container.classList.add("hidden");
     innerContainer.setAttribute("class", "inner-container");
     h1.setAttribute("class", "title");
     img.setAttribute("src", imgResult);
@@ -230,6 +229,7 @@ function rickAndMortyCharacterImage(data) {
     liSpecies.setAttribute("class", "list");
     liLocation.setAttribute("class", "list");
     button.setAttribute("class", "btn");
+    button.setAttribute("id", "character" + i);
 
     innerContainer.appendChild(h1);
     innerContainer.appendChild(img);
@@ -240,7 +240,7 @@ function rickAndMortyCharacterImage(data) {
     innerContainer.appendChild(button);
     container.appendChild(innerContainer);
 
-    body.appendChild(container);
+
   }
 }
 
@@ -261,25 +261,42 @@ function handleLocation(event) {
 
   //event.currentTarget (which card you clicked)
   //Call onSelectPress with data from currentTarget
+  var planets = document.getElementById("planets");
+  planets.classList.add("hidden");
 
-  // if(event.target.matches(".btn")){
-  //   console.log("match");
-  // }else{
-  //   console.log("fail");
-  // }
-  console.log("success");
-  onSelectPress(event.currentTarget);
+  var ships = document.getElementById("capsules");
+  ships.classList.remove("hidden");
+
+
+  onSelectPress(event.target);
 }
 
+
+function handleShips(event){
+  var ships = document.getElementById("capsules");
+  ships.classList.add("hidden");
+
+  var characters = document.getElementById("characters");
+  characters.classList.remove("hidden");
+
+  onSelectPress(event.target);
+}
+
+
+function handleCharacters(event){
+
+}
 
 
 function handlers() {
   var introButton = document.getElementById("introModal");
   introButton.addEventListener("click", handleIntro);
 
-  var button = document.querySelector(".locationButton");
-  button.addEventListener("click", handleLocation);
+  var planets = document.getElementById("planets");
+  planets.addEventListener("click", handleLocation);
 
+  var ships = document.getElementById("capsules");
+  ships.addEventListener("click", handleShips);
 }
 
 handlers();
