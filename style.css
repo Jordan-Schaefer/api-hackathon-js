@@ -26,6 +26,8 @@ header {
   color: white;
 }
 
+
+
 .container {
   margin: auto;
   width: 90%;
@@ -37,7 +39,6 @@ header {
 .inner-container {
   min-width: 32%;
   width: 32%;
-  pointer-events: none;
   display: flex;
   flex-direction: column;
   background-color: black;
@@ -77,7 +78,12 @@ header {
   background-color: red;
 }
 
-
+.select {
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  width: 75%;
+}
 
 
 
