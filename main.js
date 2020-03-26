@@ -145,6 +145,7 @@ function rickAndMortyPlanetImage(data) {
     ul.appendChild(liResidents);
     innerContainer.appendChild(ul);
     innerContainer.appendChild(button);
+
     container.appendChild(innerContainer);
 
   }
@@ -257,27 +258,31 @@ function handleIntro(event) {
 
 
 function handleLocation(event) {
-  var location = document.getElementById("planets");
-  location.classList.add("hidden");
+
   //event.currentTarget (which card you clicked)
   //Call onSelectPress with data from currentTarget
 
-  var ships = document.getElementById("capsules");
-  ships.classList.remove("hidden");
-
-  onSelectPress(event.currentTarget)
+  // if(event.target.matches(".btn")){
+  //   console.log("match");
+  // }else{
+  //   console.log("fail");
+  // }
+  console.log("success");
+  onSelectPress(event.currentTarget);
 }
 
-setTimeout(handlers, 2000);
+
 
 function handlers() {
   var introButton = document.getElementById("introModal");
   introButton.addEventListener("click", handleIntro);
 
+  var button = document.querySelector(".locationButton");
+  button.addEventListener("click", handleLocation);
 
-  var locationButton = document.querySelector("#locationButton0");
-  locationButton.addEventListener("click", handleLocation);
 }
+
+handlers();
 
 function onSelectPress(data) {
   console.log(data);
