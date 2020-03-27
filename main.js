@@ -339,6 +339,11 @@ function locationSelect(data) {
   selectLocation.appendChild(innerContainer);
 }
 
+
+
+
+
+
 function onSelectShips(data) {
   console.log(data);
   var dataAtt = data.getAttribute("id");
