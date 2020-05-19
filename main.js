@@ -352,15 +352,30 @@ function onSelectShips(data){
 }
 
 function shipSelect(data){
-
   console.log(data);
+  var selectShip = document.querySelector('.select-ship');
+  var innerContainer = document.createElement('div');
+  var h1 = document.createElement('h1');
+  var img = document.createElement('img');
+  var ul = document.createElement('ul');
+  var liCapsule = document.createElement("li");
+  var liStatus = document.createElement("li");
+  var liMissions = document.createElement("li");
+
+  innerContainer.classList.add('inner-container');
+  h1.classList.add('title');
+  img.setAttribute('src');
+  img.classList.add('image');
+  liCapsule.classList.add('list');
+  liStatus.classList.add('list');
+  liMissions.classList.add('list');
+
+
 }
 
 
 function onSelectCharacter (data){
   console.log(data)
-
-
   var dataAtt = data.getAttribute("id");
   dataAtt++;
 
