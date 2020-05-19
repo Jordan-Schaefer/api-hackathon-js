@@ -97,6 +97,28 @@ var spaceXShips = [
   "images/cap206.jpg"
 ];
 
+var spaceXshipsObj = {
+  'C101': "images/cap101.jpg",
+  'C102': "images/cap102.jpg",
+  'C103': "images/cap103.jpg",
+  'C104': "images/cap104.png",
+  'C105': "images/cap105.jpg",
+  'C106': "images/cap106.jpg",
+  'C107': "images/cap107.jpg",
+  'C108': "images/cap108.jpg",
+  'C109': "images/cap109.jpg",
+  'C110': "images/cap110.jpg",
+  'C111': "images/cap111.jpg",
+  'C112': "images/cap112.jpg",
+  'C113': "images/cap113.jpg",
+  'C201': "images/cap201.jpg",
+  'C205': "images/cap205.jpg",
+  'C202': "images/cap202.jpg",
+  'C203': "images/cap203.jpg",
+  'C204': "images/cap204.jpg",
+  'C206': "images/cap206.jpg"
+}
+
 function errorMsg(error) {
   console.error(error);
 }
@@ -178,7 +200,7 @@ function spaceXCapsules(data) {
     liStatus.setAttribute("class", "list");
     liMissions.setAttribute("class", "list");
     button.setAttribute("class", "btn");
-    button.setAttribute("id", i);
+    button.setAttribute("id", data[i].capsule_serial);
 
     innerContainer.appendChild(h1);
     innerContainer.appendChild(image);
@@ -267,7 +289,7 @@ function handleShips(event){
 
   var characters = document.getElementById("characters");
   characters.classList.remove("hidden");
-
+  console.log(event.target)
   onSelectShips(event.target);
 }
 
@@ -345,14 +367,20 @@ function onSelectShips(data){
   console.log(dataAtt);
   $.ajax({
     method: "GET",
-    url: "https://api.spacexdata.com/v3/capsules/C1" + (dataAtt + 1),
+    url: "https://api.spacexdata.com/v3/capsules/" + dataAtt,
     success: shipSelect,
     error: errorMsg
   })
 }
 
 function shipSelect(data){
-  console.log(data);
+  console.log(data)
+  var image = data.capsule_serial;
+  for (var keys in spaceXshipsObj){
+    if (keys === image){
+      image = spaceXshipsObj[keys];
+    }
+  }
   var selectShip = document.querySelector('.select-ship');
   var innerContainer = document.createElement('div');
   var h1 = document.createElement('h1');
@@ -364,13 +392,28 @@ function shipSelect(data){
 
   innerContainer.classList.add('inner-container');
   h1.classList.add('title');
-  img.setAttribute('src');
+  img.setAttribute('src', image);
   img.classList.add('image');
   liCapsule.classList.add('list');
   liStatus.classList.add('list');
   liMissions.classList.add('list');
 
+  h1.textContent = data.capsule_serial;
+  liCapsule.textContent = "Calsule: " + data.capsule_id;
+  liStatus.textContent = "Status: " + data.status;
+  liMissions.textContent = "Missions: " + data.missions.length
 
+    // liCapsule.textContent = "Capsule: " + data[i].capsule_id;
+  // liStatus.textContent = "Status: " + data[i].status;
+  // liMissions.textContent = "Missions: " + data[i].missions.length;
+
+  innerContainer.appendChild(h1);
+  innerContainer.appendChild(img);
+  ul.appendChild(liCapsule);
+  ul.appendChild(liStatus);
+  ul.appendChild(liMissions);
+  innerContainer.appendChild(ul);
+  selectShip.appendChild(innerContainer);
 }
 
 
