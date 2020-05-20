@@ -283,7 +283,7 @@ function handleLocation(event) {
 }
 
 
-function handleShips(event){
+function handleShips(event) {
   var ships = document.getElementById("capsules");
   ships.classList.add("hidden");
 
@@ -291,10 +291,11 @@ function handleShips(event){
   characters.classList.remove("hidden");
   console.log(event.target)
   onSelectShips(event.target);
+  shipSelect(event.target);
 }
 
 
-function handleCharacters(event){
+function handleCharacters(event) {
   onSelectCharacter(event.target);
 }
 
@@ -314,7 +315,6 @@ function handlers() {
 }
 
 
-
 function onSelectLocation(data) {
 
   var dataAtt = data.getAttribute("id");
@@ -328,7 +328,7 @@ function onSelectLocation(data) {
 }
 
 
-function locationSelect(data){
+function locationSelect(data) {
   console.log(data);
   var selectLocation = document.querySelector(".select-location");
   var innerContainer = document.createElement("div");
@@ -361,7 +361,12 @@ function locationSelect(data){
   selectLocation.appendChild(innerContainer);
 }
 
-function onSelectShips(data){
+
+
+
+
+
+function onSelectShips(data) {
   console.log(data);
   var dataAtt = data.getAttribute("id");
   console.log(dataAtt);
@@ -390,6 +395,68 @@ function shipSelect(data){
   var liStatus = document.createElement("li");
   var liMissions = document.createElement("li");
 
+  dataAtt++;
+
+  if (dataAtt < 10) {
+    console.log(dataAtt);
+    $.ajax({
+      method: "GET",
+      url: "https://api.spacexdata.com/v3/capsules/C10" + dataAtt,
+      success: shipSelect,
+      error: errorMsg
+    })
+  }else if(dataAtt > 10 && dataAtt < 14){
+    console.log(dataAtt);
+    $.ajax({
+      method: "GET",
+      url: "https://api.spacexdata.com/v3/capsules/C1" + dataAtt,
+      success: shipSelect,
+      error: errorMsg
+    })
+  }else{
+    console.log(dataAtt);
+    dataAtt -= 13;
+    $.ajax({
+      method: "GET",
+      url: "https://api.spacexdata.com/v3/capsules/C20" + dataAtt,
+      success: shipSelect,
+      error: errorMsg
+    })
+  }
+}
+
+function shipSelect(data) {
+  var selectShip = document.querySelector(".select-ship");
+  var container = document.createElement("div");
+  var h1 = document.createElement("h1");
+  var img = document.createElement("img");
+  var ul = document.createElement("ul");
+  var liCapsule = document.createElement("li");
+  var liStatus = document.createElement("li");
+  var liMissions = document.createElement("li");
+
+  container.classList.add("inner-container");
+  h1.classList.add("title");
+  img.classList.add("image");
+  liCapsule.classList.add("list");
+  liStatus.classList.add("list");
+  liMissions.classList.add("list");
+
+  h1.textContent = data.capsule_serial;
+  img.setAttribute("src", spaceXShips[10])
+  liCapsule.textContent = data.capsule_id;
+  liStatus.textContent = data.status;
+  liMissions.textContent = data.missions.length;
+
+  container.appendChild(h1);
+  container.appendChild(img);
+  ul.appendChild(liCapsule);
+  ul.appendChild(liStatus);
+  ul.appendChild(liMissions);
+  container.appendChild(ul);
+  selectShip.appendChild(container);
+
+
   innerContainer.classList.add('inner-container');
   h1.classList.add('title');
   img.setAttribute('src', image);
@@ -417,7 +484,7 @@ function shipSelect(data){
 }
 
 
-function onSelectCharacter (data){
+function onSelectCharacter(data) {
   console.log(data)
   var dataAtt = data.getAttribute("id");
   dataAtt++;
@@ -431,7 +498,7 @@ function onSelectCharacter (data){
   })
 }
 
-function characterSelect (data){
+function characterSelect(data) {
   console.log(data);
   var selectCharacter = document.querySelector(".select-character");
   var innerContainer = document.createElement("div");
