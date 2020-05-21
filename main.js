@@ -1,5 +1,5 @@
 //Rick and Morty Planets
-var container = document.querySelector("#planets");
+const container = document.querySelector("#planets");
 
 $.ajax({
   method: "GET",
@@ -52,7 +52,7 @@ $.ajax({
 })
 
 
-var rickAndMorthyPlanets = [
+const rickAndMorthyPlanets = [
   "images/c137.png",
   "images/abadangoCluster.PNG",
   "images/citadelOfRicks.png",
@@ -75,7 +75,7 @@ var rickAndMorthyPlanets = [
   "images/earthReplacement.jpg"
 ];
 
-var spaceXShips = [
+const spaceXShips = [
   "images/cap101.jpg",
   "images/cap102.jpg",
   "images/cap103.jpg",
@@ -97,7 +97,7 @@ var spaceXShips = [
   "images/cap206.jpg"
 ];
 
-var spaceXshipsObj = {
+const spaceXshipsObj = {
   'C101': "images/cap101.jpg",
   'C102': "images/cap102.jpg",
   'C103': "images/cap103.jpg",
@@ -131,15 +131,15 @@ function rickAndMortyPlanetImage(data) {
 
   container.classList.add("hidden");
 
-  for (var i = 0; i < data.results.length; i++) {
-    var innerContainer = document.createElement("div");
-    var h1 = document.createElement("h1");
-    var newImage = document.createElement("img");
-    var ul = document.createElement("ul");
-    var liType = document.createElement("li");
-    var liDimension = document.createElement("li");
-    var liResidents = document.createElement("li");
-    var button = document.createElement("button");
+  for (let i = 0; i < data.results.length; i++) {
+    const innerContainer = document.createElement("div");
+    const h1 = document.createElement("h1");
+    const newImage = document.createElement("img");
+    const ul = document.createElement("ul");
+    const liType = document.createElement("li");
+    const liDimension = document.createElement("li");
+    const liResidents = document.createElement("li");
+    const button = document.createElement("button");
 
     h1.textContent = data.results[i].name;
     var imageResult = rickAndMorthyPlanets[i];
@@ -171,18 +171,18 @@ function rickAndMortyPlanetImage(data) {
 }
 
 function spaceXCapsules(data) {
-  var body = document.querySelector("body");
-  var container = document.getElementById("capsules");
+  const body = document.querySelector("body");
+  const container = document.getElementById("capsules");
 
-  for (var i = 0; i < data.length; i++) {
-    var innerContainer = document.createElement("div");
-    var h1 = document.createElement("h1");
-    var image = document.createElement("img");
-    var ul = document.createElement("ul");
-    var liCapsule = document.createElement("li");
-    var liStatus = document.createElement("li");
-    var liMissions = document.createElement("li");
-    var button = document.createElement("button");
+  for (let i = 0; i < data.length; i++) {
+   const innerContainer = document.createElement("div");
+   const h1 = document.createElement("h1");
+   const image = document.createElement("img");
+   const ul = document.createElement("ul");
+   const liCapsule = document.createElement("li");
+   const liStatus = document.createElement("li");
+   const liMissions = document.createElement("li");
+   const button = document.createElement("button");
 
     h1.textContent = data[i].capsule_serial;
     var imageResult = spaceXShips[i];
@@ -217,21 +217,21 @@ function spaceXCapsules(data) {
 
 function rickAndMortyCharacterImage(data) {
 
-  var container = document.getElementById("characters");
+  const container = document.getElementById("characters");
 
-  for (var i = 0; i < data.results.length; i++) {
+  for (let i = 0; i < data.results.length; i++) {
 
-    var innerContainer = document.createElement("div");
-    var h1 = document.createElement("h1");
-    var img = document.createElement("img");
-    var ul = document.createElement("ul");
-    var liStatus = document.createElement("li");
-    var liSpecies = document.createElement("li");
-    var liLocation = document.createElement("li");
-    var button = document.createElement("button");
+    const innerContainer = document.createElement("div");
+    const h1 = document.createElement("h1");
+    const img = document.createElement("img");
+    const ul = document.createElement("ul");
+    const liStatus = document.createElement("li");
+    const liSpecies = document.createElement("li");
+    const liLocation = document.createElement("li");
+    const button = document.createElement("button");
 
     h1.textContent = data.results[i].name;
-    var imgResult = data.results[i].image;
+    const imgResult = data.results[i].image;
     liStatus.textContent = "Status: " + data.results[i].status;
     liSpecies.textContent = "Species: " + data.results[i].species;
     liLocation.textContent = "Location: " + data.results[i].location.name;
@@ -264,34 +264,33 @@ function rickAndMortyCharacterImage(data) {
 
 function handleIntro(event) {
 
-  var introModal = document.querySelector(".intro-modal");
+  const introModal = document.querySelector(".intro-modal");
   introModal.classList.add("hidden");
 
-  var planets = document.getElementById("planets");
+  const planets = document.getElementById("planets");
   planets.classList.remove("hidden");
 }
 
 
 
 function handleLocation(event) {
-  var planets = document.getElementById("planets");
+  const planets = document.getElementById("planets");
   planets.classList.add("hidden");
 
-  var ships = document.getElementById("capsules");
+  const ships = document.getElementById("capsules");
   ships.classList.remove("hidden");
   onSelectLocation(event.target);
 }
 
 
 function handleShips(event) {
-  var ships = document.getElementById("capsules");
+  const ships = document.getElementById("capsules");
   ships.classList.add("hidden");
 
-  var characters = document.getElementById("characters");
+  const characters = document.getElementById("characters");
   characters.classList.remove("hidden");
-  console.log(event.target)
+
   onSelectShips(event.target);
-  shipSelect(event.target);
 }
 
 
@@ -301,23 +300,23 @@ function handleCharacters(event) {
 
 
 function handlers() {
-  var introButton = document.getElementById("introModal");
+  const introButton = document.getElementById("introModal");
   introButton.addEventListener("click", handleIntro);
 
-  var planets = document.getElementById("planets");
+  const planets = document.getElementById("planets");
   planets.addEventListener("click", handleLocation);
 
-  var ships = document.getElementById("capsules");
+  const ships = document.getElementById("capsules");
   ships.addEventListener("click", handleShips);
 
-  var character = document.getElementById("characters");
+  const character = document.getElementById("characters");
   character.addEventListener("click", handleCharacters);
 }
 
 
-function onSelectLocation(data) {
 
-  var dataAtt = data.getAttribute("id");
+function onSelectLocation(data) {
+  let dataAtt = data.getAttribute("id");
   dataAtt++;
   $.ajax({
     method: "GET",
@@ -329,15 +328,15 @@ function onSelectLocation(data) {
 
 
 function locationSelect(data) {
-  console.log(data);
-  var selectLocation = document.querySelector(".select-location");
-  var innerContainer = document.createElement("div");
-  var h1 = document.createElement("h1");
-  var img = document.createElement("img");
-  var ul = document.createElement("ul");
-  var liType = document.createElement("li");
-  var liDimension = document.createElement("li");
-  var liResidents = document.createElement("li");
+
+  const selectLocation = document.querySelector(".select-location");
+  const innerContainer = document.createElement("div");
+  const h1 = document.createElement("h1");
+  const img = document.createElement("img");
+  const ul = document.createElement("ul");
+  const liType = document.createElement("li");
+  const liDimension = document.createElement("li");
+  const liResidents = document.createElement("li");
 
   innerContainer.classList.add("inner-container");
   h1.classList.add("title");
@@ -346,6 +345,8 @@ function locationSelect(data) {
   liType.classList.add("list");
   liDimension.classList.add("list");
   liResidents.classList.add("list");
+  liResidents.setAttribute('id', 'location-residents');
+  liType.setAttribute('id', 'planet-type');
 
   h1.textContent = data.name;
   liType.textContent = data.type;
@@ -361,15 +362,8 @@ function locationSelect(data) {
   selectLocation.appendChild(innerContainer);
 }
 
-
-
-
-
-
 function onSelectShips(data) {
-  console.log(data);
-  var dataAtt = data.getAttribute("id");
-  console.log(dataAtt);
+  const dataAtt = data.getAttribute("id");
   $.ajax({
     method: "GET",
     url: "https://api.spacexdata.com/v3/capsules/" + dataAtt,
@@ -378,84 +372,22 @@ function onSelectShips(data) {
   })
 }
 
-function shipSelect(data){
-  console.log(data)
-  var image = data.capsule_serial;
-  for (var keys in spaceXshipsObj){
-    if (keys === image){
+function shipSelect(data) {
+
+  let image = data.capsule_serial;
+  for (const keys in spaceXshipsObj) {
+    if (keys === image) {
       image = spaceXshipsObj[keys];
     }
   }
-  var selectShip = document.querySelector('.select-ship');
-  var innerContainer = document.createElement('div');
-  var h1 = document.createElement('h1');
-  var img = document.createElement('img');
-  var ul = document.createElement('ul');
-  var liCapsule = document.createElement("li");
-  var liStatus = document.createElement("li");
-  var liMissions = document.createElement("li");
-
-  dataAtt++;
-
-  if (dataAtt < 10) {
-    console.log(dataAtt);
-    $.ajax({
-      method: "GET",
-      url: "https://api.spacexdata.com/v3/capsules/C10" + dataAtt,
-      success: shipSelect,
-      error: errorMsg
-    })
-  }else if(dataAtt > 10 && dataAtt < 14){
-    console.log(dataAtt);
-    $.ajax({
-      method: "GET",
-      url: "https://api.spacexdata.com/v3/capsules/C1" + dataAtt,
-      success: shipSelect,
-      error: errorMsg
-    })
-  }else{
-    console.log(dataAtt);
-    dataAtt -= 13;
-    $.ajax({
-      method: "GET",
-      url: "https://api.spacexdata.com/v3/capsules/C20" + dataAtt,
-      success: shipSelect,
-      error: errorMsg
-    })
-  }
-}
-
-function shipSelect(data) {
-  var selectShip = document.querySelector(".select-ship");
-  var container = document.createElement("div");
-  var h1 = document.createElement("h1");
-  var img = document.createElement("img");
-  var ul = document.createElement("ul");
-  var liCapsule = document.createElement("li");
-  var liStatus = document.createElement("li");
-  var liMissions = document.createElement("li");
-
-  container.classList.add("inner-container");
-  h1.classList.add("title");
-  img.classList.add("image");
-  liCapsule.classList.add("list");
-  liStatus.classList.add("list");
-  liMissions.classList.add("list");
-
-  h1.textContent = data.capsule_serial;
-  img.setAttribute("src", spaceXShips[10])
-  liCapsule.textContent = data.capsule_id;
-  liStatus.textContent = data.status;
-  liMissions.textContent = data.missions.length;
-
-  container.appendChild(h1);
-  container.appendChild(img);
-  ul.appendChild(liCapsule);
-  ul.appendChild(liStatus);
-  ul.appendChild(liMissions);
-  container.appendChild(ul);
-  selectShip.appendChild(container);
-
+  const selectShip = document.querySelector('.select-ship');
+  const innerContainer = document.createElement('div');
+  const h1 = document.createElement('h1');
+  const img = document.createElement('img');
+  const ul = document.createElement('ul');
+  const liCapsule = document.createElement("li");
+  const liStatus = document.createElement("li");
+  const liMissions = document.createElement("li");
 
   innerContainer.classList.add('inner-container');
   h1.classList.add('title');
@@ -464,15 +396,13 @@ function shipSelect(data) {
   liCapsule.classList.add('list');
   liStatus.classList.add('list');
   liMissions.classList.add('list');
+  liMissions.setAttribute('id', 'ship-missions');
+  liStatus.setAttribute('id', 'ship-status')
 
   h1.textContent = data.capsule_serial;
-  liCapsule.textContent = "Calsule: " + data.capsule_id;
-  liStatus.textContent = "Status: " + data.status;
-  liMissions.textContent = "Missions: " + data.missions.length
-
-    // liCapsule.textContent = "Capsule: " + data[i].capsule_id;
-  // liStatus.textContent = "Status: " + data[i].status;
-  // liMissions.textContent = "Missions: " + data[i].missions.length;
+  liCapsule.textContent = data.capsule_id;
+  liStatus.textContent = data.status;
+  liMissions.textContent = data.missions.length
 
   innerContainer.appendChild(h1);
   innerContainer.appendChild(img);
@@ -485,11 +415,9 @@ function shipSelect(data) {
 
 
 function onSelectCharacter(data) {
-  console.log(data)
-  var dataAtt = data.getAttribute("id");
+  let dataAtt = data.getAttribute("id");
   dataAtt++;
 
-  console.log(dataAtt);
   $.ajax({
     method: "GET",
     url: "https://rickandmortyapi.com/api/character/" + dataAtt,
@@ -499,15 +427,15 @@ function onSelectCharacter(data) {
 }
 
 function characterSelect(data) {
-  console.log(data);
-  var selectCharacter = document.querySelector(".select-character");
-  var innerContainer = document.createElement("div");
-  var h1 = document.createElement("h1");
-  var img = document.createElement("img");
-  var ul = document.createElement("ul");
-  var liStatus = document.createElement("li");
-  var liSpecies = document.createElement("li");
-  var liLocation = document.createElement("li");
+
+  const selectCharacter = document.querySelector(".select-character");
+  const innerContainer = document.createElement("div");
+  const h1 = document.createElement("h1");
+  const img = document.createElement("img");
+  const ul = document.createElement("ul");
+  const liStatus = document.createElement("li");
+  const liSpecies = document.createElement("li");
+  const liLocation = document.createElement("li");
 
   innerContainer.classList.add("inner-container");
   h1.classList.add("title");
@@ -516,6 +444,8 @@ function characterSelect(data) {
   liStatus.classList.add("list");
   liSpecies.classList.add("list");
   liLocation.classList.add("list");
+  liStatus.setAttribute('id', 'character-status');
+  liSpecies.setAttribute('id', 'species');
 
   h1.textContent = data.name;
   liStatus.textContent = data.status;
@@ -529,6 +459,102 @@ function characterSelect(data) {
   ul.appendChild(liLocation);
   innerContainer.appendChild(ul);
   selectCharacter.appendChild(innerContainer);
+
+  const selections = handleGoal();
+
+  console.log(selections)
+
+}
+
+function handleGoal(){
+  const location = parseInt(document.querySelector('#location-residents').textContent);
+  const ship = parseInt(document.querySelector('#ship-missions').textContent);
+  const character = document.querySelector('#character-status').textContent;
+  const type = document.querySelector('#planet-type').textContent;
+  const status = document.querySelector('#ship-status').textContent;
+  const species = document.querySelector('#species').textContent;
+
+  let points = 0;
+
+// Location Condition ->
+
+  if (location <= 5) {
+    points += 20;
+  } else if (location <= 15) {
+    points += 15;
+  } else if (location <= 60) {
+    points += 5;
+  }
+
+  if (type === 'Planet') {
+    points += 5;
+  } else if (type === 'Cluster') {
+    points += 7;
+  } else if (type === 'Replacement Dimension') {
+    points += 12;
+  } else if (type === 'Microverse') {
+    points += 14;
+  } else if (type === 'TV') {
+    points += 17;
+  }
+
+//  Ship Condition ->
+
+  if (ship === 0){
+    points += 10
+  } else if (ship === 1){
+    points += 5;
+  } else if (ship === 2){
+    points += 3;
+  } else if (ship === 3){
+    points += 1;
+  }
+
+  if (status === 'active') {
+    points += 10;
+  } else if (status === 'retired') {
+    points += 4;
+  } else if (status === 'unknown') {
+    points += 3;
+  } else if (status === 'destroyed') {
+    points += 1;
+  }
+
+// Character Condition ->
+
+  if (character === 'Alive') {
+    points += 15;
+  } else if (character === 'unknown') {
+    points += 5;
+  } else if (character === 'Dead') {
+    points += 1;
+  }
+
+  if (species === 'Human') {
+    points += 7;
+  } else if (species === 'Alien') {
+    points += 17;
+  }
+
+  const random = Math.floor(Math.random() * 60);
+  let winOrLose = '';
+  if (random > points){
+    winOrLose = 'So Sorry, but chu lose'
+  } else if (random === points){
+    winOrLose = 'Wow that was a close one but you pulled it off';
+  } else if (random < points){
+    winOrLose = 'Dam you be a boss at this';
+  }
+
+  const selections = {
+    location: location,
+    ship: ship,
+    character: character,
+    type: type,
+    status: status,
+    species: species
+  }
+  return selections
 
 }
 
