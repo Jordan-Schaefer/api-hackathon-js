@@ -119,6 +119,35 @@ const spaceXshipsObj = {
   'C206': "images/cap206.jpg"
 }
 
+const win = [
+  'win-1',
+  'win-2',
+  'win-3',
+  'win-4',
+  'win-5'
+];
+
+const lose = [
+  'lose-1',
+  'lose-2',
+  'lose-3',
+  'lose-4'
+];
+
+const travel = [
+  'travel-1',
+  'travel-2',
+  'travel-3',
+  'travel-4',
+  'travel-5',
+  'travel-6'
+];
+
+const crash = [
+  'crash-1',
+  'crash-2'
+];
+
 function errorMsg(error) {
   console.error(error);
 }
@@ -473,8 +502,10 @@ function handleGoal(){
   const type = document.querySelector('#planet-type').textContent;
   const status = document.querySelector('#ship-status').textContent;
   const species = document.querySelector('#species').textContent;
+  document.querySelector('#characters').classList.add('hidden')
 
   let points = 0;
+
 
 // Location Condition ->
 
@@ -539,12 +570,18 @@ function handleGoal(){
   const random = Math.floor(Math.random() * 60);
   let winOrLose = '';
   if (random > points){
-    winOrLose = 'So Sorry, but chu lose'
+    const number = Math.floor(Math.random() * 4);
+    winOrLose = document.querySelector('#' + win[number]);
   } else if (random === points){
-    winOrLose = 'Wow that was a close one but you pulled it off';
+    winOrLose = document.querySelector('#close-one');
   } else if (random < points){
-    winOrLose = 'Dam you be a boss at this';
+    const number = Math.floor(Math.random() * 3);
+    winOrLose = document.querySelector('#' + lose[number]);
   }
+
+  winOrLose.classList.remove('hidden')
+
+  console.log(winOrLose)
 
   const selections = {
     location: location,
@@ -557,6 +594,8 @@ function handleGoal(){
   return selections
 
 }
+
+
 
 
 handlers();
