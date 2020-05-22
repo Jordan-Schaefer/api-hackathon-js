@@ -25,7 +25,9 @@ header {
   color: white;
 }
 
-
+.no-point {
+  pointer-events: none;
+}
 
 .container {
   margin: auto;
