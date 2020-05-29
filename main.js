@@ -489,10 +489,7 @@ function characterSelect(data) {
   innerContainer.appendChild(ul);
   selectCharacter.appendChild(innerContainer);
 
-  const selections = handleGoal();
-
-  console.log(selections)
-
+  handleGoal();
 }
 
 function handleGoal(){
@@ -505,7 +502,6 @@ function handleGoal(){
   document.querySelector('#characters').classList.add('hidden')
 
   let points = 0;
-
 
 // Location Condition ->
 
@@ -566,33 +562,39 @@ function handleGoal(){
   } else if (species === 'Alien') {
     points += 17;
   }
+  displayTravel(points)
+}
+
+function displayTravel(points){
+  const travelModalRandom = Math.floor(Math.random() * 5)
+  console.log(travelModalRandom)
+  const travelModal = document.querySelector('#' + travel[travelModalRandom]);
+  travelModal.classList.remove('hidden');
+
+  setTimeout(() => {
+    travelModal.classList.add('hidden');
+    displayFinish(points);
+  }, 3500)
+}
+
+function displayFinish(points){
 
   const random = Math.floor(Math.random() * 60);
   let winOrLose = '';
-  if (random > points){
+  if (points < 25) {
+    const number = Math.floor(Math.random() * 2)
+    winOrLose = document.querySelector('#' + crash[number])
+  } else if (random > points) {
     const number = Math.floor(Math.random() * 4);
     winOrLose = document.querySelector('#' + win[number]);
-  } else if (random === points){
+  } else if (random === points) {
     winOrLose = document.querySelector('#close-one');
-  } else if (random < points){
+  } else if (random < points) {
     const number = Math.floor(Math.random() * 3);
     winOrLose = document.querySelector('#' + lose[number]);
   }
 
   winOrLose.classList.remove('hidden')
-
-  console.log(winOrLose)
-
-  const selections = {
-    location: location,
-    ship: ship,
-    character: character,
-    type: type,
-    status: status,
-    species: species
-  }
-  return selections
-
 }
 
 
