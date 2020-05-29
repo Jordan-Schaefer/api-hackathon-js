@@ -506,7 +506,6 @@ function handleGoal(){
 
   let points = 0;
 
-
 // Location Condition ->
 
   if (location <= 5) {
@@ -569,7 +568,10 @@ function handleGoal(){
 
   const random = Math.floor(Math.random() * 60);
   let winOrLose = '';
-  if (random > points){
+  if (points < 25){
+    const number = Math.floor(Math.random() * 2)
+    winOrLose = document.querySelector('#' + crash[number])
+  } else if (random > points){
     const number = Math.floor(Math.random() * 4);
     winOrLose = document.querySelector('#' + win[number]);
   } else if (random === points){
@@ -581,10 +583,8 @@ function handleGoal(){
 
   winOrLose.classList.remove('hidden')
 
-  console.log(winOrLose)
-
   const selections = {
-    location: location,
+    resident: location,
     ship: ship,
     character: character,
     type: type,
