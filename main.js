@@ -489,10 +489,7 @@ function characterSelect(data) {
   innerContainer.appendChild(ul);
   selectCharacter.appendChild(innerContainer);
 
-  const selections = handleGoal();
-
-  console.log(selections)
-
+  handleGoal();
 }
 
 function handleGoal(){
@@ -565,8 +562,12 @@ function handleGoal(){
   } else if (species === 'Alien') {
     points += 17;
   }
+  displayTravel(points)
+}
 
+function displayTravel(points){
   const travelModalRandom = Math.floor(Math.random() * 5)
+  console.log(travelModalRandom)
   const travelModal = document.querySelector('#' + travel[travelModalRandom]);
   travelModal.classList.remove('hidden');
 
@@ -574,21 +575,10 @@ function handleGoal(){
     travelModal.classList.add('hidden');
     displayFinish(points);
   }, 3500)
-
-
-  const selections = {
-    resident: location,
-    ship: ship,
-    character: character,
-    type: type,
-    status: status,
-    species: species
-  }
-  return selections
 }
 
 function displayFinish(points){
-  console.log(points)
+
   const random = Math.floor(Math.random() * 60);
   let winOrLose = '';
   if (points < 25) {
