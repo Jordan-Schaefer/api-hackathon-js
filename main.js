@@ -566,22 +566,15 @@ function handleGoal(){
     points += 17;
   }
 
-  const random = Math.floor(Math.random() * 60);
-  let winOrLose = '';
-  if (points < 25){
-    const number = Math.floor(Math.random() * 2)
-    winOrLose = document.querySelector('#' + crash[number])
-  } else if (random > points){
-    const number = Math.floor(Math.random() * 4);
-    winOrLose = document.querySelector('#' + win[number]);
-  } else if (random === points){
-    winOrLose = document.querySelector('#close-one');
-  } else if (random < points){
-    const number = Math.floor(Math.random() * 3);
-    winOrLose = document.querySelector('#' + lose[number]);
-  }
+  const travelModalRandom = Math.floor(Math.random() * 5)
+  const travelModal = document.querySelector('#' + travel[travelModalRandom]);
+  travelModal.classList.remove('hidden');
 
-  winOrLose.classList.remove('hidden')
+  setTimeout(() => {
+    travelModal.classList.add('hidden');
+    displayFinish(points);
+  }, 3500)
+
 
   const selections = {
     resident: location,
@@ -592,7 +585,26 @@ function handleGoal(){
     species: species
   }
   return selections
+}
 
+function displayFinish(points){
+  console.log(points)
+  const random = Math.floor(Math.random() * 60);
+  let winOrLose = '';
+  if (points < 25) {
+    const number = Math.floor(Math.random() * 2)
+    winOrLose = document.querySelector('#' + crash[number])
+  } else if (random > points) {
+    const number = Math.floor(Math.random() * 4);
+    winOrLose = document.querySelector('#' + win[number]);
+  } else if (random === points) {
+    winOrLose = document.querySelector('#close-one');
+  } else if (random < points) {
+    const number = Math.floor(Math.random() * 3);
+    winOrLose = document.querySelector('#' + lose[number]);
+  }
+
+  winOrLose.classList.remove('hidden')
 }
 
 
