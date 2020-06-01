@@ -120,33 +120,63 @@ const spaceXshipsObj = {
 }
 
 const win = [
-  'win-1',
-  'win-2',
-  'win-3',
-  'win-4',
-  'win-5'
-];
+  "https://giphy.com/embed/QxNUlSv1uQvEFRiTmi",
+  "https://giphy.com/embed/LQjqYNrXB0fDy",
+  "https://giphy.com/embed/1USKMDPjuH4ovL7J5h",
+  "https://giphy.com/embed/YRiRZGlioGVLAwo86B",
+  "https://giphy.com/embed/26gZ1Ye2gkRUxtj9u"
+]
+
+// const win = [
+//   'win-1',
+//   'win-2',
+//   'win-3',
+//   'win-4',
+//   'win-5'
+// ];
 
 const lose = [
-  'lose-1',
-  'lose-2',
-  'lose-3',
-  'lose-4'
-];
+  "https://giphy.com/embed/l41K3kXwW1YTdolsQ",
+  "https://giphy.com/embed/h8VEOlDyRLTQo8cCtB",
+  "https://giphy.com/embed/ayQ99hp01HFN6",
+  "https://giphy.com/embed/3o7aCYqbC8uCdhcgG4"
+]
+
+// const lose = [
+//   'lose-1',
+//   'lose-2',
+//   'lose-3',
+//   'lose-4'
+// ];
 
 const travel = [
-  'travel-1',
-  'travel-2',
-  'travel-3',
-  'travel-4',
-  'travel-5',
-  'travel-6'
-];
+  "https://giphy.com/embed/3o85xuRNcQRoe81z56",
+  "https://giphy.com/embed/SYpCPn7WKoaVpFOzFi",
+  "https://giphy.com/embed/emNRpeFXylj86et3jw",
+  "https://giphy.com/embed/3ohs4rclkSSrNGSlFK",
+  "https://giphy.com/embed/26DMXCypYxHVNydMc",
+  "https://giphy.com/embed/b85mPT4Usz7fq"
+]
+
+// const travel = [
+//   'travel-1',
+//   'travel-2',
+//   'travel-3',
+//   'travel-4',
+//   'travel-5',
+//   'travel-6'
+// ];
 
 const crash = [
-  'crash-1',
-  'crash-2'
-];
+  "https://giphy.com/embed/KDcGQnsMvmEKo3ItUs",
+  "https://giphy.com/embed/YTY2sdc9vw38JMfpC6",
+
+]
+
+// const crash = [
+//   'crash-1',
+//   'crash-2'
+// ];
 
 function errorMsg(error) {
   console.error(error);
@@ -566,10 +596,13 @@ function handleGoal(){
 }
 
 function displayTravel(points){
-  const travelModalRandom = Math.floor(Math.random() * 5)
-  console.log(travelModalRandom)
-  const travelModal = document.querySelector('#' + travel[travelModalRandom]);
-  travelModal.classList.remove('hidden');
+  const finish = document.querySelector('#finish');
+  const travelModalRandom = Math.floor(Math.random() * 5);
+  const travelModal = document.createElement('iframe');
+  travelModal.setAttribute('src', travel[travelModalRandom]);
+  travelModal.classList.add('no-point', 'giphy');
+  finish.appendChild(travelModal);
+
 
   setTimeout(() => {
     travelModal.classList.add('hidden');
@@ -578,23 +611,24 @@ function displayTravel(points){
 }
 
 function displayFinish(points){
+  const finish = document.querySelector('#finish');
 
   const random = Math.floor(Math.random() * 60);
-  let winOrLose = '';
+  let winOrLose = document.createElement('iframe');
+  winOrLose.classList.add('no-point', 'giphy')
   if (points < 25) {
     const number = Math.floor(Math.random() * 2)
-    winOrLose = document.querySelector('#' + crash[number])
+    winOrLose.setAttribute('src', crash[number])
   } else if (random > points) {
     const number = Math.floor(Math.random() * 4);
-    winOrLose = document.querySelector('#' + win[number]);
+    winOrLose.setAttribute('src', win[number]);
   } else if (random === points) {
-    winOrLose = document.querySelector('#close-one');
+    winOrLose.setAttribute('src', 'https://giphy.com/embed/yjI5G3pE3NH3O');
   } else if (random < points) {
     const number = Math.floor(Math.random() * 3);
-    winOrLose = document.querySelector('#' + lose[number]);
+    winOrLose.setAttribute('src', lose[number]);
   }
-
-  winOrLose.classList.remove('hidden')
+  finish.appendChild(winOrLose);
 }
 
 

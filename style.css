@@ -17,7 +17,7 @@ header {
   justify-content: center;
   align-items: center;
   padding: 3%;
-  width: 35%;
+  width: 75%;
   font-family: Courier, monospace;
   font-weight: bold;
   background-color: rgba(0, 0, 0, 0.8);
@@ -86,6 +86,9 @@ header {
   width: 75%;
 }
 
+.giphy {
+  width: 85%;
+}
 
 
 .hidden {
