@@ -1,6 +1,6 @@
-body {
+.main {
   margin: auto;
-  max-width: 1300px;
+  max-width: 1200px;
 }
 
 header {
@@ -88,6 +88,7 @@ header {
 
 .giphy {
   width: 85%;
+  height: 55%;
 }
 
 

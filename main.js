@@ -592,22 +592,29 @@ function handleGoal(){
   } else if (species === 'Alien') {
     points += 17;
   }
-  displayTravel(points)
+  const selections = {
+    character: character,
+    ship: ship,
+    location: location
+  };
+  displayTravel(points, selections);
 }
 
-function displayTravel(points){
+function displayTravel(points, selections){
+  console.log(selections)
   const finish = document.querySelector('#finish');
   const travelModalRandom = Math.floor(Math.random() * 5);
   const travelModal = document.createElement('iframe');
   travelModal.setAttribute('src', travel[travelModalRandom]);
   travelModal.classList.add('no-point', 'giphy');
   finish.appendChild(travelModal);
+  finish.classList.remove('hidden');
 
 
   setTimeout(() => {
     travelModal.classList.add('hidden');
     displayFinish(points);
-  }, 3500)
+  }, 4500)
 }
 
 function displayFinish(points){
