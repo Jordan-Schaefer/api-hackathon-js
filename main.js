@@ -388,7 +388,7 @@ function onSelectLocation(data) {
 
 function locationSelect(data) {
 
-  const selectLocation = document.querySelector(".select-location");
+  const selectLocation = document.querySelector("#picks");
   const innerContainer = document.createElement("div");
   const h1 = document.createElement("h1");
   const img = document.createElement("img");
@@ -439,7 +439,7 @@ function shipSelect(data) {
       image = spaceXshipsObj[keys];
     }
   }
-  const selectShip = document.querySelector('.select-ship');
+  const selectShip = document.querySelector('#picks');
   const innerContainer = document.createElement('div');
   const h1 = document.createElement('h1');
   const img = document.createElement('img');
@@ -487,7 +487,7 @@ function onSelectCharacter(data) {
 
 function characterSelect(data) {
 
-  const selectCharacter = document.querySelector(".select-character");
+  const selectCharacter = document.querySelector("#picks");
   const innerContainer = document.createElement("div");
   const h1 = document.createElement("h1");
   const img = document.createElement("img");
@@ -602,40 +602,55 @@ function handleGoal(){
 
 function displayTravel(points, selections){
   console.log(selections)
-  const finish = document.querySelector('#finish');
+  const travelContainer = document.querySelector('#travel');
   const travelModalRandom = Math.floor(Math.random() * 5);
   const travelModal = document.createElement('iframe');
+  const title = document.createElement('h1');
+  title.textContent = 'We have lift off!';
   travelModal.setAttribute('src', travel[travelModalRandom]);
   travelModal.classList.add('no-point', 'giphy');
-  finish.appendChild(travelModal);
-  finish.classList.remove('hidden');
+  travelContainer.appendChild(title);
+  travelContainer.appendChild(travelModal);
+  travelContainer.classList.remove('hidden');
 
 
   setTimeout(() => {
-    travelModal.classList.add('hidden');
+    travelContainer.classList.add('hidden');
     displayFinish(points);
   }, 4500)
 }
 
 function displayFinish(points){
   const finish = document.querySelector('#finish');
+  const title = document.createElement('h1');
+  const restart = document.createElement('button');
+  restart.textContent = 'Try Again?';
+  restart.classList.add('btn');
+  restart.addEventListener('click', () => location.reload());
 
   const random = Math.floor(Math.random() * 60);
-  let winOrLose = document.createElement('iframe');
+  const winOrLose = document.createElement('iframe');
   winOrLose.classList.add('no-point', 'giphy')
   if (points < 25) {
+    title.textContent = "Wow, poor choices! Looks like you'r ship crashed!";
     const number = Math.floor(Math.random() * 2)
     winOrLose.setAttribute('src', crash[number])
   } else if (random > points) {
+    title.textContent = 'Great job! Planet destroyed!';
     const number = Math.floor(Math.random() * 4);
     winOrLose.setAttribute('src', win[number]);
   } else if (random === points) {
+    title.textContent = 'That was a close one but you pulled it off!';
     winOrLose.setAttribute('src', 'https://giphy.com/embed/yjI5G3pE3NH3O');
   } else if (random < points) {
+    title.textContent = 'Oh boy, looks like you are making things hard on yourself. Better luck next time!';
     const number = Math.floor(Math.random() * 3);
     winOrLose.setAttribute('src', lose[number]);
   }
+  finish.classList.remove('hidden');
+  finish.appendChild(title);
   finish.appendChild(winOrLose);
+  finish.appendChild(restart)
 }
 
 
