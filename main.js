@@ -1,6 +1,4 @@
 //Rick and Morty Planets
-const container = document.querySelector("#planets");
-
 $.ajax({
   method: "GET",
   url: "https://rickandmortyapi.com/api/location/",
@@ -8,33 +6,7 @@ $.ajax({
   error: errorMsg
 })
 
-$.ajax({
-  method: "GET",
-  url: "https://rickandmortyapi.com/api/location/",
-  success: result,
-  error: errorMsg
-})
-
-//Rick and Morty Characters Being Displayed in the Page with styling
-
-$.ajax({
-  mathod: "GET",
-  url: "https://rickandmortyapi.com/api/character/",
-  success: rickAndMortyCharacterImage,
-  error: errorMsg
-})
-
-// Rick and Morty Characters
-
-$.ajax({
-  method: "GET",
-  url: "https://rickandmortyapi.com/api/character/",
-  success: result,
-  error: errorMsg
-})
-
 // SpaceX Capsules
-
 $.ajax({
   method: "GET",
   url: "https://api.spacexdata.com/v3/capsules",
@@ -42,12 +14,11 @@ $.ajax({
   error: errorMsg
 })
 
-// SpaceX Status
-
+//Rick and Morty Characters
 $.ajax({
-  method: "GET",
-  url: "https://api.spacexdata.com/v3/capsules",
-  success: result,
+  mathod: "GET",
+  url: "https://rickandmortyapi.com/api/character/",
+  success: rickAndMortyCharacterImage,
   error: errorMsg
 })
 
@@ -127,27 +98,12 @@ const win = [
   "https://giphy.com/embed/26gZ1Ye2gkRUxtj9u"
 ]
 
-// const win = [
-//   'win-1',
-//   'win-2',
-//   'win-3',
-//   'win-4',
-//   'win-5'
-// ];
-
 const lose = [
   "https://giphy.com/embed/l41K3kXwW1YTdolsQ",
   "https://giphy.com/embed/h8VEOlDyRLTQo8cCtB",
   "https://giphy.com/embed/ayQ99hp01HFN6",
   "https://giphy.com/embed/3o7aCYqbC8uCdhcgG4"
 ]
-
-// const lose = [
-//   'lose-1',
-//   'lose-2',
-//   'lose-3',
-//   'lose-4'
-// ];
 
 const travel = [
   "https://giphy.com/embed/3o85xuRNcQRoe81z56",
@@ -158,38 +114,18 @@ const travel = [
   "https://giphy.com/embed/b85mPT4Usz7fq"
 ]
 
-// const travel = [
-//   'travel-1',
-//   'travel-2',
-//   'travel-3',
-//   'travel-4',
-//   'travel-5',
-//   'travel-6'
-// ];
-
 const crash = [
   "https://giphy.com/embed/KDcGQnsMvmEKo3ItUs",
   "https://giphy.com/embed/YTY2sdc9vw38JMfpC6",
-
 ]
-
-// const crash = [
-//   'crash-1',
-//   'crash-2'
-// ];
 
 function errorMsg(error) {
   console.error(error);
 }
 
-function result(data) {
-  console.log(data);
-}
-
 function rickAndMortyPlanetImage(data) {
-
+  const container = document.querySelector("#planets");
   container.classList.add("hidden");
-
   for (let i = 0; i < data.results.length; i++) {
     const innerContainer = document.createElement("div");
     const h1 = document.createElement("h1");
@@ -199,6 +135,7 @@ function rickAndMortyPlanetImage(data) {
     const liDimension = document.createElement("li");
     const liResidents = document.createElement("li");
     const button = document.createElement("button");
+    button.addEventListener('click', () => onSelectLocation(data.results[i].id))
 
     h1.textContent = data.results[i].name;
     var imageResult = rickAndMorthyPlanets[i];
@@ -230,18 +167,17 @@ function rickAndMortyPlanetImage(data) {
 }
 
 function spaceXCapsules(data) {
-  const body = document.querySelector("body");
   const container = document.getElementById("capsules");
-
   for (let i = 0; i < data.length; i++) {
-   const innerContainer = document.createElement("div");
-   const h1 = document.createElement("h1");
-   const image = document.createElement("img");
-   const ul = document.createElement("ul");
-   const liCapsule = document.createElement("li");
-   const liStatus = document.createElement("li");
-   const liMissions = document.createElement("li");
-   const button = document.createElement("button");
+    const innerContainer = document.createElement("div");
+    const h1 = document.createElement("h1");
+    const image = document.createElement("img");
+    const ul = document.createElement("ul");
+    const liCapsule = document.createElement("li");
+    const liStatus = document.createElement("li");
+    const liMissions = document.createElement("li");
+    const button = document.createElement("button");
+    button.addEventListener('click', () => onSelectShips(data[i].capsule_serial))
 
     h1.textContent = data[i].capsule_serial;
     var imageResult = spaceXShips[i];
@@ -269,17 +205,12 @@ function spaceXCapsules(data) {
     innerContainer.appendChild(ul);
     innerContainer.appendChild(button);
     container.appendChild(innerContainer);
-    body.appendChild(container);
-
   }
 }
 
 function rickAndMortyCharacterImage(data) {
-
   const container = document.getElementById("characters");
-
   for (let i = 0; i < data.results.length; i++) {
-
     const innerContainer = document.createElement("div");
     const h1 = document.createElement("h1");
     const img = document.createElement("img");
@@ -288,6 +219,7 @@ function rickAndMortyCharacterImage(data) {
     const liSpecies = document.createElement("li");
     const liLocation = document.createElement("li");
     const button = document.createElement("button");
+    button.addEventListener('click', () => onSelectCharacter(data.results[i].id))
 
     h1.textContent = data.results[i].name;
     const imgResult = data.results[i].image;
@@ -319,75 +251,33 @@ function rickAndMortyCharacterImage(data) {
   }
 }
 
-
-
-function handleIntro(event) {
-
+function handleIntro() {
   const introModal = document.querySelector(".intro-modal");
   introModal.classList.add("hidden");
-
   const planets = document.getElementById("planets");
   planets.classList.remove("hidden");
 }
 
-
-
-function handleLocation(event) {
-  const planets = document.getElementById("planets");
-  planets.classList.add("hidden");
-
-  const ships = document.getElementById("capsules");
-  ships.classList.remove("hidden");
-  onSelectLocation(event.target);
-}
-
-
-function handleShips(event) {
-  const ships = document.getElementById("capsules");
-  ships.classList.add("hidden");
-
-  const characters = document.getElementById("characters");
-  characters.classList.remove("hidden");
-
-  onSelectShips(event.target);
-}
-
-
-function handleCharacters(event) {
-  onSelectCharacter(event.target);
-}
-
-
 function handlers() {
   const introButton = document.getElementById("introModal");
   introButton.addEventListener("click", handleIntro);
-
-  const planets = document.getElementById("planets");
-  planets.addEventListener("click", handleLocation);
-
-  const ships = document.getElementById("capsules");
-  ships.addEventListener("click", handleShips);
-
-  const character = document.getElementById("characters");
-  character.addEventListener("click", handleCharacters);
 }
 
-
-
 function onSelectLocation(data) {
-  let dataAtt = data.getAttribute("id");
-  dataAtt++;
+  document.documentElement.scrollTop = 0;
+  const planets = document.getElementById("planets");
+  planets.classList.add("hidden");
+  const ships = document.getElementById("capsules");
+  ships.classList.remove("hidden");
   $.ajax({
     method: "GET",
-    url: "https://rickandmortyapi.com/api/location/" + dataAtt,
+    url: "https://rickandmortyapi.com/api/location/" + data,
     success: locationSelect,
     error: errorMsg
   })
 }
 
-
 function locationSelect(data) {
-
   const selectLocation = document.querySelector("#picks");
   const innerContainer = document.createElement("div");
   const h1 = document.createElement("h1");
@@ -422,17 +312,20 @@ function locationSelect(data) {
 }
 
 function onSelectShips(data) {
-  const dataAtt = data.getAttribute("id");
+  document.documentElement.scrollTop = 0;
+  const capsules = document.getElementById("capsules");
+  capsules.classList.add("hidden");
+  const characters = document.getElementById("characters");
+  characters.classList.remove("hidden");
   $.ajax({
     method: "GET",
-    url: "https://api.spacexdata.com/v3/capsules/" + dataAtt,
+    url: "https://api.spacexdata.com/v3/capsules/" + data,
     success: shipSelect,
     error: errorMsg
   })
 }
 
 function shipSelect(data) {
-
   let image = data.capsule_serial;
   for (const keys in spaceXshipsObj) {
     if (keys === image) {
@@ -472,21 +365,17 @@ function shipSelect(data) {
   selectShip.appendChild(innerContainer);
 }
 
-
 function onSelectCharacter(data) {
-  let dataAtt = data.getAttribute("id");
-  dataAtt++;
-
+  document.documentElement.scrollTop = 0;
   $.ajax({
     method: "GET",
-    url: "https://rickandmortyapi.com/api/character/" + dataAtt,
+    url: "https://rickandmortyapi.com/api/character/" + data,
     success: characterSelect,
     error: errorMsg
   })
 }
 
 function characterSelect(data) {
-
   const selectCharacter = document.querySelector("#picks");
   const innerContainer = document.createElement("div");
   const h1 = document.createElement("h1");
@@ -509,7 +398,7 @@ function characterSelect(data) {
   h1.textContent = data.name;
   liStatus.textContent = data.status;
   liSpecies.textContent = data.species;
-  liLocation.textContent = data.location;
+  liLocation.textContent = data.location.name;
 
   innerContainer.appendChild(h1);
   innerContainer.appendChild(img);
@@ -533,8 +422,6 @@ function handleGoal(){
 
   let points = 0;
 
-// Location Condition ->
-
   if (location <= 5) {
     points += 20;
   } else if (location <= 15) {
@@ -554,8 +441,6 @@ function handleGoal(){
   } else if (type === 'TV') {
     points += 17;
   }
-
-//  Ship Condition ->
 
   if (ship === 0){
     points += 10
@@ -577,8 +462,6 @@ function handleGoal(){
     points += 1;
   }
 
-// Character Condition ->
-
   if (character === 'Alive') {
     points += 15;
   } else if (character === 'unknown') {
@@ -592,27 +475,21 @@ function handleGoal(){
   } else if (species === 'Alien') {
     points += 17;
   }
-  const selections = {
-    character: character,
-    ship: ship,
-    location: location
-  };
-  displayTravel(points, selections);
+  displayTravel(points);
 }
 
-function displayTravel(points, selections){
-  console.log(selections)
+function displayTravel(points){
   const travelContainer = document.querySelector('#travel');
   const travelModalRandom = Math.floor(Math.random() * 5);
   const travelModal = document.createElement('iframe');
   const title = document.createElement('h1');
+  title.classList.add('title');
   title.textContent = 'We have lift off!';
   travelModal.setAttribute('src', travel[travelModalRandom]);
   travelModal.classList.add('no-point', 'giphy');
   travelContainer.appendChild(title);
   travelContainer.appendChild(travelModal);
   travelContainer.classList.remove('hidden');
-
 
   setTimeout(() => {
     travelContainer.classList.add('hidden');
@@ -624,13 +501,14 @@ function displayFinish(points){
   const finish = document.querySelector('#finish');
   const title = document.createElement('h1');
   const restart = document.createElement('button');
+  title.classList.add('title');
   restart.textContent = 'Try Again?';
   restart.classList.add('btn');
   restart.addEventListener('click', () => location.reload());
 
   const random = Math.floor(Math.random() * 60);
   const winOrLose = document.createElement('iframe');
-  winOrLose.classList.add('no-point', 'giphy')
+  winOrLose.classList.add('no-point');
   if (points < 25) {
     title.textContent = "Wow, poor choices! Looks like you'r ship crashed!";
     const number = Math.floor(Math.random() * 2)
@@ -652,8 +530,4 @@ function displayFinish(points){
   finish.appendChild(winOrLose);
   finish.appendChild(restart)
 }
-
-
-
-
 handlers();

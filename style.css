@@ -16,8 +16,14 @@ header {
   font-weight: bolder;
 }
 
+h1 {
+  text-align: center;
+}
+
 .intro-modal {
   margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,6 +35,11 @@ header {
   background-color: rgba(0, 0, 0, 0.8);
   border: 3px solid rgba(169, 169, 169, 0.575);
   color: white;
+}
+
+iframe {
+  border: none !important;
+  margin-bottom: 3%;
 }
 
 .select {
@@ -47,8 +58,8 @@ header {
 }
 
 .inner-container {
-
   width: 32%;
+  margin-bottom: 2%;
   display: flex;
   flex-direction: column;
   background-color: black;
@@ -81,18 +92,14 @@ header {
   font-weight: bold;
   font-family: Courier, monospace;
   background-color: lightcoral;
+  border: none;
   transition: ease-in .2s;
 }
 
 .btn:hover{
   background-color: red;
+  color: aliceblue;
 }
-
-/* .giphy {
-  width: 900px;
-
-} */
-
 
 .no-point {
   pointer-events: none;
@@ -102,17 +109,44 @@ header {
   display: none;
 }
 
-@media screen and (max-width: 780px){
+@media screen and (max-width: 1025px){
+   body {
+    background-size: 100vh;
+  }
+   header {
+    font-size: 3rem;
+  }
+   .title {
+    font-size: 2rem;
+  }
   .inner-container {
     width: 47%;
   }
-  .title {
-    font-size: large;
+  .list {
+    font-size: 1.5rem;
+  }
+  .btn {
+    font-size: 2rem;
   }
 }
 
-@media screen and (max-width: 370px){
+@media screen and (max-width: 380px){
+  #picks {
+    display: none;
+  }
+  body {
+    background-size: 100vh;
+  }
+    .title {
+    font-size: 1.3rem;
+  }
   .inner-container{
     width: 75%;
+  }
+  .list {
+    font-size: 1rem;
+  }
+  header {
+    font-size: 1.5rem;
   }
 }
