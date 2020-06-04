@@ -104,15 +104,21 @@ iframe {
 }
 
 @media screen and (max-width: 780px){
+   body {
+    background-size: 100vh;
+  }
   .inner-container {
     width: 47%;
   }
   .title {
-    font-size: large;
+    font-size: 2rem;
   }
 }
 
 @media screen and (max-width: 380px){
+  body {
+    background-size: 100vh;
+  }
   .inner-container{
     width: 75%;
   }
