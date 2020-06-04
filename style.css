@@ -22,6 +22,8 @@ h1 {
 
 .intro-modal {
   margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,6 +39,7 @@ h1 {
 
 iframe {
   border: none !important;
+  margin-bottom: 3%;
 }
 
 .select {
@@ -56,6 +59,7 @@ iframe {
 
 .inner-container {
   width: 32%;
+  margin-bottom: 2%;
   display: flex;
   flex-direction: column;
   background-color: black;
@@ -88,11 +92,13 @@ iframe {
   font-weight: bold;
   font-family: Courier, monospace;
   background-color: lightcoral;
+  border: none;
   transition: ease-in .2s;
 }
 
 .btn:hover{
   background-color: red;
+  color: aliceblue;
 }
 
 .no-point {
@@ -103,24 +109,42 @@ iframe {
   display: none;
 }
 
-@media screen and (max-width: 780px){
+@media screen and (max-width: 1025px){
    body {
     background-size: 100vh;
+  }
+   header {
+    font-size: 3rem;
+  }
+   .title {
+    font-size: 2rem;
   }
   .inner-container {
     width: 47%;
   }
-  .title {
+  .list {
+    font-size: 1.5rem;
+  }
+  .btn {
     font-size: 2rem;
   }
 }
 
 @media screen and (max-width: 380px){
+  #picks {
+    display: none;
+  }
   body {
     background-size: 100vh;
   }
+    .title {
+    font-size: 1.3rem;
+  }
   .inner-container{
     width: 75%;
+  }
+  .list {
+    font-size: 1rem;
   }
   header {
     font-size: 1.5rem;

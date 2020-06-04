@@ -1,6 +1,4 @@
 //Rick and Morty Planets
-const container = document.querySelector("#planets");
-
 $.ajax({
   method: "GET",
   url: "https://rickandmortyapi.com/api/location/",
@@ -8,33 +6,7 @@ $.ajax({
   error: errorMsg
 })
 
-$.ajax({
-  method: "GET",
-  url: "https://rickandmortyapi.com/api/location/",
-  success: result,
-  error: errorMsg
-})
-
-//Rick and Morty Characters Being Displayed in the Page with styling
-
-$.ajax({
-  mathod: "GET",
-  url: "https://rickandmortyapi.com/api/character/",
-  success: rickAndMortyCharacterImage,
-  error: errorMsg
-})
-
-// Rick and Morty Characters
-
-$.ajax({
-  method: "GET",
-  url: "https://rickandmortyapi.com/api/character/",
-  success: result,
-  error: errorMsg
-})
-
 // SpaceX Capsules
-
 $.ajax({
   method: "GET",
   url: "https://api.spacexdata.com/v3/capsules",
@@ -42,12 +14,11 @@ $.ajax({
   error: errorMsg
 })
 
-// SpaceX Status
-
+//Rick and Morty Characters
 $.ajax({
-  method: "GET",
-  url: "https://api.spacexdata.com/v3/capsules",
-  success: result,
+  mathod: "GET",
+  url: "https://rickandmortyapi.com/api/character/",
+  success: rickAndMortyCharacterImage,
   error: errorMsg
 })
 
@@ -146,21 +117,15 @@ const travel = [
 const crash = [
   "https://giphy.com/embed/KDcGQnsMvmEKo3ItUs",
   "https://giphy.com/embed/YTY2sdc9vw38JMfpC6",
-
 ]
 
 function errorMsg(error) {
   console.error(error);
 }
 
-function result(data) {
-  console.log(data);
-}
-
 function rickAndMortyPlanetImage(data) {
-
+  const container = document.querySelector("#planets");
   container.classList.add("hidden");
-
   for (let i = 0; i < data.results.length; i++) {
     const innerContainer = document.createElement("div");
     const h1 = document.createElement("h1");
@@ -202,9 +167,7 @@ function rickAndMortyPlanetImage(data) {
 }
 
 function spaceXCapsules(data) {
-  const body = document.querySelector("body");
   const container = document.getElementById("capsules");
-
   for (let i = 0; i < data.length; i++) {
     const innerContainer = document.createElement("div");
     const h1 = document.createElement("h1");
@@ -215,7 +178,6 @@ function spaceXCapsules(data) {
     const liMissions = document.createElement("li");
     const button = document.createElement("button");
     button.addEventListener('click', () => onSelectShips(data[i].capsule_serial))
-    console.log(data[i].capsule_serial)
 
     h1.textContent = data[i].capsule_serial;
     var imageResult = spaceXShips[i];
@@ -243,17 +205,12 @@ function spaceXCapsules(data) {
     innerContainer.appendChild(ul);
     innerContainer.appendChild(button);
     container.appendChild(innerContainer);
-    body.appendChild(container);
-
   }
 }
 
 function rickAndMortyCharacterImage(data) {
-
   const container = document.getElementById("characters");
-
   for (let i = 0; i < data.results.length; i++) {
-
     const innerContainer = document.createElement("div");
     const h1 = document.createElement("h1");
     const img = document.createElement("img");
@@ -306,9 +263,8 @@ function handlers() {
   introButton.addEventListener("click", handleIntro);
 }
 
-
-
 function onSelectLocation(data) {
+  document.documentElement.scrollTop = 0;
   const planets = document.getElementById("planets");
   planets.classList.add("hidden");
   const ships = document.getElementById("capsules");
@@ -321,9 +277,7 @@ function onSelectLocation(data) {
   })
 }
 
-
 function locationSelect(data) {
-
   const selectLocation = document.querySelector("#picks");
   const innerContainer = document.createElement("div");
   const h1 = document.createElement("h1");
@@ -358,12 +312,11 @@ function locationSelect(data) {
 }
 
 function onSelectShips(data) {
+  document.documentElement.scrollTop = 0;
   const capsules = document.getElementById("capsules");
   capsules.classList.add("hidden");
   const characters = document.getElementById("characters");
   characters.classList.remove("hidden");
-
-  console.log(data)
   $.ajax({
     method: "GET",
     url: "https://api.spacexdata.com/v3/capsules/" + data,
@@ -373,7 +326,6 @@ function onSelectShips(data) {
 }
 
 function shipSelect(data) {
-
   let image = data.capsule_serial;
   for (const keys in spaceXshipsObj) {
     if (keys === image) {
@@ -413,8 +365,8 @@ function shipSelect(data) {
   selectShip.appendChild(innerContainer);
 }
 
-
 function onSelectCharacter(data) {
+  document.documentElement.scrollTop = 0;
   $.ajax({
     method: "GET",
     url: "https://rickandmortyapi.com/api/character/" + data,
@@ -424,7 +376,6 @@ function onSelectCharacter(data) {
 }
 
 function characterSelect(data) {
-
   const selectCharacter = document.querySelector("#picks");
   const innerContainer = document.createElement("div");
   const h1 = document.createElement("h1");
@@ -447,7 +398,7 @@ function characterSelect(data) {
   h1.textContent = data.name;
   liStatus.textContent = data.status;
   liSpecies.textContent = data.species;
-  liLocation.textContent = data.location;
+  liLocation.textContent = data.location.name;
 
   innerContainer.appendChild(h1);
   innerContainer.appendChild(img);
@@ -471,8 +422,6 @@ function handleGoal(){
 
   let points = 0;
 
-// Location Condition ->
-
   if (location <= 5) {
     points += 20;
   } else if (location <= 15) {
@@ -492,8 +441,6 @@ function handleGoal(){
   } else if (type === 'TV') {
     points += 17;
   }
-
-//  Ship Condition ->
 
   if (ship === 0){
     points += 10
@@ -515,8 +462,6 @@ function handleGoal(){
     points += 1;
   }
 
-// Character Condition ->
-
   if (character === 'Alive') {
     points += 15;
   } else if (character === 'unknown') {
@@ -530,16 +475,10 @@ function handleGoal(){
   } else if (species === 'Alien') {
     points += 17;
   }
-  const selections = {
-    character: character,
-    ship: ship,
-    location: location
-  };
-  displayTravel(points, selections);
+  displayTravel(points);
 }
 
-function displayTravel(points, selections){
-  console.log(selections)
+function displayTravel(points){
   const travelContainer = document.querySelector('#travel');
   const travelModalRandom = Math.floor(Math.random() * 5);
   const travelModal = document.createElement('iframe');
@@ -551,7 +490,6 @@ function displayTravel(points, selections){
   travelContainer.appendChild(title);
   travelContainer.appendChild(travelModal);
   travelContainer.classList.remove('hidden');
-
 
   setTimeout(() => {
     travelContainer.classList.add('hidden');
@@ -592,8 +530,4 @@ function displayFinish(points){
   finish.appendChild(winOrLose);
   finish.appendChild(restart)
 }
-
-
-
-
 handlers();
