@@ -1,19 +1,29 @@
 # C220-Hackathon-2
 
-For this Hackathon, you will be combining multiple public APIs of your choosing in order to create a web application that uses their combined data to create something new. The application is yours to design, but your idea must be approved by an instructor before you can move forward with building the application.
+#### A web application utilizing the spaceX API and the Rick and Morty API
 
-### Requirements
-- Combine **at least** 2 public APIs via AJAX requests and present their combined information in a web application of your design.
-- Must be issue-managed via [Meistertask](https://www.meistertask.com/) or an equivalent Kanban board.
-- Application idea **MUST** be approved by an instructor before you begin coding your project.
+## Technologies Used
 
+  - JavaScript
+  - jQuery (Ajax)
+  - CSS
+  - HTML
 
-### Approved API List
+## Features
 
-Found [**here**](https://docs.google.com/document/d/10CMIYVWv36gophaq_3DldBoAT4w6g4xL9xEMnEu-z5o/edit?usp=sharing)
+  - Users can select a location
+  - Users can select a ship
+  - Users can select a character
+  - Destruction outcome is based off selections and chance
 
-### ProgrammableWeb API Directory
+## Live Demo
 
-Found [**here**](https://www.programmableweb.com/apis/directory)
+### Check out the live version here:
 
-**NOTE:** Any APIs found through this link not on the approved API list above must be approved by an instructor to be used. In order to be approved, you must be able to provide proof of a successful AJAX call in the browser **WITHOUT** using VSCode's Live Server.
+## Deployment
+
+  1. Fork this repository
+
+  2. Clone this repository
+
+  3. Open in browser
