@@ -606,6 +606,7 @@ function displayTravel(points, selections){
   const travelModalRandom = Math.floor(Math.random() * 5);
   const travelModal = document.createElement('iframe');
   const title = document.createElement('h1');
+  title.classList.add('title');
   title.textContent = 'We have lift off!';
   travelModal.setAttribute('src', travel[travelModalRandom]);
   travelModal.classList.add('no-point', 'giphy');
@@ -624,13 +625,14 @@ function displayFinish(points){
   const finish = document.querySelector('#finish');
   const title = document.createElement('h1');
   const restart = document.createElement('button');
+  title.classList.add('title');
   restart.textContent = 'Try Again?';
   restart.classList.add('btn');
   restart.addEventListener('click', () => location.reload());
 
   const random = Math.floor(Math.random() * 60);
   const winOrLose = document.createElement('iframe');
-  winOrLose.classList.add('no-point', 'giphy')
+  winOrLose.classList.add('no-point');
   if (points < 25) {
     title.textContent = "Wow, poor choices! Looks like you'r ship crashed!";
     const number = Math.floor(Math.random() * 2)

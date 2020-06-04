@@ -16,6 +16,10 @@ header {
   font-weight: bolder;
 }
 
+h1 {
+  text-align: center;
+}
+
 .intro-modal {
   margin: auto;
   display: flex;
@@ -29,6 +33,10 @@ header {
   background-color: rgba(0, 0, 0, 0.8);
   border: 3px solid rgba(169, 169, 169, 0.575);
   color: white;
+}
+
+iframe {
+  border: none !important;
 }
 
 .select {
@@ -47,7 +55,6 @@ header {
 }
 
 .inner-container {
-
   width: 32%;
   display: flex;
   flex-direction: column;
@@ -88,12 +95,6 @@ header {
   background-color: red;
 }
 
-/* .giphy {
-  width: 900px;
-
-} */
-
-
 .no-point {
   pointer-events: none;
 }
@@ -111,8 +112,11 @@ header {
   }
 }
 
-@media screen and (max-width: 370px){
+@media screen and (max-width: 380px){
   .inner-container{
     width: 75%;
+  }
+  header {
+    font-size: 1.5rem;
   }
 }
