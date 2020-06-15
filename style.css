@@ -94,6 +94,7 @@ iframe {
   background-color: lightcoral;
   border: none;
   transition: ease-in .2s;
+  cursor: pointer;
 }
 
 .btn:hover{
