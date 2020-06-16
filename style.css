@@ -123,8 +123,11 @@ iframe {
   .inner-container {
     width: 47%;
   }
+  ul {
+    padding-right: 5px;
+  }
   .list {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   .btn {
     font-size: 2rem;
